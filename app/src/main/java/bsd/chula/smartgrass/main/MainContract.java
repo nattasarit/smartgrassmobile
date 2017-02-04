@@ -14,13 +14,15 @@ public interface MainContract {
 
         void showAllTasks(List<Task> taskList);
 
+        void showErrorDialog(String msg);
+
         void showTaskDetailUI(Task task);
 
     }
 
     interface UserActions {
 
-        void loadTaskList(List<Task> taskList);
+        void loadTaskList();
 
         void loadTask(int id);
     }

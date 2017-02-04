@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIManager {
 
-    public static APIServices getService(Context context) {
+    public static APIServices getService() {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(60, TimeUnit.SECONDS)

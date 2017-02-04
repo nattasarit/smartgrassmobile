@@ -5,5 +5,7 @@
     <string name="login_hint_username">ใส่ชื่อผู้ใช้</string>
     <string name="login_hint_password">ใส่รหัสผ่าน</string>
     <string name="login_btn_login">เข้าสู่ระบบ</string>
+    <string name="login_error_username_msg">กรุณาระบุชื่อผู้ใช้</string>
+    <string name="login_error_password_msg">กรุณาระบุรหัสผ่าน</string>
     <!-- End -->
 </resources>
