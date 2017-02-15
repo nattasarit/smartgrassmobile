@@ -21,6 +21,7 @@ public class GLSurf extends GLSurfaceView {
         mRenderer = new GLRenderer(context);
         setRenderer(mRenderer);
 
+
         // Render the view only when there is a change in the drawing data
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
@@ -37,6 +38,10 @@ public class GLSurf extends GLSurfaceView {
         // TODO Auto-generated method stub
         super.onResume();
         mRenderer.onResume();
+    }
+
+    public void drawLine(){
+
     }
 
 }
