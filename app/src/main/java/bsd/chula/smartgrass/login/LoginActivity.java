@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import bsd.chula.smartgrass.R;
+import bsd.chula.smartgrass.draw.DrawActivity;
 import bsd.chula.smartgrass.main.MainActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,8 +45,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Override
     public void showLoginSuccessUI() {
 
-        Intent mainIntent = new Intent(this, MainActivity.class);
-        startActivity(mainIntent);
+//        Intent mainIntent = new Intent(this, MainActivity.class);
+//        startActivity(mainIntent);
+
+        Intent drawIntent = new Intent(this, DrawActivity.class);
+        startActivity(drawIntent);
+
 
         finish();
     }
@@ -57,19 +62,20 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @OnClick(R.id.btnLogin)
     public void onLoginButtonClick(View view) {
-
         String username = editUsername.getText().toString();
         String password = editPassword.getText().toString();
 
-        if (username.length() == 0) {
-            setEditTextError(editUsername);
+//        if (username.length() == 0) {
+//            setEditTextError(editUsername);
+//
+//        } else if (password.length() == 0) {
+//
+//            setEditTextError(editPassword);
+//        } else {
+//            presenter.login(username, password);
+//        }
 
-        } else if (password.length() == 0) {
-
-            setEditTextError(editPassword);
-        } else {
-            presenter.login(username, password);
-        }
+        presenter.login(username, password);
     }
 
     private void setEditTextError(EditText editText) {

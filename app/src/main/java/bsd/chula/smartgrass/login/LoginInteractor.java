@@ -19,11 +19,12 @@ public class LoginInteractor implements LoginContract.Interactor{
 
         //ทดสอบ
 
-        if (username.contentEquals("Kittisak") && password.contentEquals("password1")) {
-            listener.onLoginSuccess();
-        } else {
-            listener.onLoginError("Your Username & Password NOT Correct!");
-        }
+//        if (username.contentEquals("Kittisak") && password.contentEquals("password1")) {
+//            listener.onLoginSuccess();
+//        } else {
+//            listener.onLoginError("Your Username & Password NOT Correct!");
+//        }
+        listener.onLoginSuccess();
 
     }
 }
