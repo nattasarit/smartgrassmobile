@@ -1,5 +1,6 @@
 package bsd.chula.smartgrass.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import bsd.chula.smartgrass.R;
 import bsd.chula.smartgrass.data.task.Task;
+import bsd.chula.smartgrass.draw.DrawActivity;
 import bsd.chula.smartgrass.utils.SpacesItemDecoration;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -73,6 +75,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         @Override
         public void onTaskItemClick(Task task) {
             presenter.loadTask(task.getId());
+
+           
         }
     };
 }
