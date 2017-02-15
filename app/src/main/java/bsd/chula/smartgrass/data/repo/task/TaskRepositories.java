@@ -1,4 +1,6 @@
-package bsd.chula.smartgrass.data.task;
+package bsd.chula.smartgrass.data.repo.task;
+
+import bsd.chula.smartgrass.data.model.Order;
 
 /**
  * Created by Dev_Tee on 1/28/17.
@@ -18,7 +20,7 @@ public class TaskRepositories implements TaskRepository {
     }
 
     @Override
-    public void updateTaskItem(Task task, UpdateTaskItemCallback callback) {
+    public void updateTaskItem(Order order, UpdateTaskItemCallback callback) {
 
     }
 
