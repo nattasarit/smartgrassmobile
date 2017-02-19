@@ -51,7 +51,7 @@ public class DrawActivity extends Activity {
 
         // Attach our surfaceview to our relative layout from our main layout.
         //RelativeLayout.LayoutParams glParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        RelativeLayout.LayoutParams glParams = new RelativeLayout.LayoutParams(900, 900);
+        RelativeLayout.LayoutParams glParams = new RelativeLayout.LayoutParams(1280, 1280);
 
         layout.addView(glSurfaceView, glParams);
 

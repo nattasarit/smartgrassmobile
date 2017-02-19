@@ -35,8 +35,8 @@ public class GLRenderer implements Renderer {
     public ShortBuffer drawListBuffer;
 
     // Our screenresolution
-    float   mScreenWidth = 1440;
-    float   mScreenHeight = 1000;
+    float   mScreenWidth = 1280;
+    float   mScreenHeight = 1280;
 
     // Misc
     Context mContext;
@@ -317,13 +317,38 @@ public class GLRenderer implements Renderer {
     private float[] calEndPoint(float[] startPoint, float length, float angle) {
         float[] endpoint = new float[3];
 
-        //angle = Math.abs(angle-90);
-        //angle = (float)(angle * 0.017453292519);
+        //
 
-        angle = (float)Math.toDegrees(angle);
-        if (angle < 0.0f) {
-            angle += 360.0f;
+//        if(angle >= 0.0f && angle <= 90.0f){
+//            angle = Math.abs(angle-90);
+//        }else if(angle > 90.0f && angle <= 180.0f){
+//            angle = angle + 90;
+//        }
+//        else{
+//            angle = 360 + angle;
+//        }
+
+
+        //angle = (float) (Math.toDegrees(angle)+180);
+
+        if(angle == 0){
+            angle = angle + 90;
         }
+        else if(angle > 0 && angle <= 90){
+            angle = Math.abs(angle - 90);
+        }
+        else if(angle > 90 && angle <= 180){
+            angle = 360 - Math.abs(90 - angle);
+        }
+        else if(angle > 180 && angle <= 270 ){
+            angle = 270 - Math.abs(180 - angle);
+        }
+        else if(angle > 270 && angle <=360){
+            angle = 180 - Math.abs(270 - angle);
+        }
+
+        angle = (float)(angle * 0.017453292519);
+
 
 
         float pointX = startPoint[0] + (float)(Math.cos(angle) * length);
