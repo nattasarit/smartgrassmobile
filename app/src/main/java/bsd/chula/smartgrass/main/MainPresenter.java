@@ -28,9 +28,11 @@ public class MainPresenter implements MainContract.UserActions {
         this.view = view;
 
         interactor = new MainInteractor(context);
+
+        sampleOrderCreate();
     }
 
-    private List<Order> sampleOrderCreate() {
+    private void sampleOrderCreate() {
 
         Customer newCustomer1 = new Customer();
         newCustomer1.setId(1);
@@ -132,7 +134,11 @@ public class MainPresenter implements MainContract.UserActions {
         newOrder5.setDateTime("");
         newOrder5.setStatus(newStatus5);
 
-        return null;
+        SAMPLE_ORDER.add(newOrder1);
+        SAMPLE_ORDER.add(newOrder2);
+        SAMPLE_ORDER.add(newOrder3);
+        SAMPLE_ORDER.add(newOrder4);
+        SAMPLE_ORDER.add(newOrder5);
     }
 
     @Override

@@ -12,10 +12,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.txusballesteros.widgets.FitChart;
+import com.txusballesteros.widgets.FitChartValue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -66,6 +68,15 @@ public class MainListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         viewHolder.chartView.setMinValue(0f);
         viewHolder.chartView.setMaxValue(100f);
 
+        Collection<FitChartValue> values = new ArrayList<>();
+        values.add(new FitChartValue(20f, R.color.colorStatus1));
+        values.add(new FitChartValue(40f, R.color.colorStatus2));
+        values.add(new FitChartValue(60f, R.color.colorStatus3));
+        values.add(new FitChartValue(80f, R.color.colorStatus4));
+        values.add(new FitChartValue(100f, R.color.colorStatus5));
+
+        viewHolder.chartView.setValues(values);
+
         onSetGateStatus(item, viewHolder);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -77,6 +88,8 @@ public class MainListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        viewHolder.txtStatus.setText(item.getStatus().getName());
 
         viewHolder.layoutContainer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,47 +109,47 @@ public class MainListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         if (order.getStatus().getId() == 1) {
 
-            viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(R.color.colorStatus1));
             viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus1),
                     PorterDuff.Mode.SRC_IN);
             viewHolder.imgAction.setColorFilter(context.getResources().getColor(R.color.colorStatus1),
                     PorterDuff.Mode.SRC_IN);
+
             viewHolder.chartView.setValue(20);
 
         } else if (order.getStatus().getId() == 2) {
 
-            viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(R.color.colorStatus2));
             viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus2),
                     PorterDuff.Mode.SRC_IN);
             viewHolder.imgAction.setColorFilter(context.getResources().getColor(R.color.colorStatus2),
                     PorterDuff.Mode.SRC_IN);
+
             viewHolder.chartView.setValue(40);
 
         } else if (order.getStatus().getId() == 3) {
 
-            viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(R.color.colorStatus3));
             viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus3),
                     PorterDuff.Mode.SRC_IN);
             viewHolder.imgAction.setColorFilter(context.getResources().getColor(R.color.colorStatus3),
                     PorterDuff.Mode.SRC_IN);
+
             viewHolder.chartView.setValue(60);
 
         } else if (order.getStatus().getId() == 4) {
 
-            viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(R.color.colorStatus4));
             viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus4),
                     PorterDuff.Mode.SRC_IN);
             viewHolder.imgAction.setColorFilter(context.getResources().getColor(R.color.colorStatus4),
                     PorterDuff.Mode.SRC_IN);
+
             viewHolder.chartView.setValue(80);
 
         } else if (order.getStatus().getId() == 5) {
 
-            viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(R.color.colorStatus5));
             viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus5),
                     PorterDuff.Mode.SRC_IN);
             viewHolder.imgAction.setColorFilter(context.getResources().getColor(R.color.colorStatus5),
                     PorterDuff.Mode.SRC_IN);
+
             viewHolder.chartView.setValue(100);
 
         } else {

@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layoutContainer"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,9 +37,7 @@
                     android:layout_margin="10dp"
                     android:background="@android:color/transparent"
                     app:animationMode="overdraw"
-                    app:backStrokeColor="@color/gray_bg"
-                    app:strokeSize="10dp"
-                    app:valueStrokeColor="@android:color/holo_green_dark" />
+                    app:strokeSize="10dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:maxLines="1"
+                            android:maxLines="2"
                             android:text="คุณกิตติศักดิ์ บัวพันนา"
                             android:textColor="@android:color/black" />
 
