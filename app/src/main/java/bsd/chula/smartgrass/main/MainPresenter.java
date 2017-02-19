@@ -110,7 +110,7 @@ public class MainPresenter implements MainContract.UserActions {
         Order newOrder3 = new Order();
         newOrder3.setId(3);
         newOrder3.setCustomer(newCustomer3);
-        newOrder3.setDescription("");
+        newOrder3.setDescription("ปูสนามหญ้า bra bra");
         newOrder3.setLat(0);
         newOrder3.setLng(0);
         newOrder3.setDateTime("");
@@ -119,7 +119,7 @@ public class MainPresenter implements MainContract.UserActions {
         Order newOrder4 = new Order();
         newOrder4.setId(4);
         newOrder4.setCustomer(newCustomer4);
-        newOrder4.setDescription("");
+        newOrder4.setDescription("ปูสนามหญ้า bra");
         newOrder4.setLat(0);
         newOrder4.setLng(0);
         newOrder4.setDateTime("");
@@ -128,7 +128,7 @@ public class MainPresenter implements MainContract.UserActions {
         Order newOrder5 = new Order();
         newOrder5.setId(3);
         newOrder5.setCustomer(newCustomer5);
-        newOrder5.setDescription("");
+        newOrder5.setDescription("ปูสนามหญ้า bra bra 123");
         newOrder5.setLat(0);
         newOrder5.setLng(0);
         newOrder5.setDateTime("");

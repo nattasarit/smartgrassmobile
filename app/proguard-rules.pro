@@ -34,3 +34,8 @@
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer
 # End
+
+# Google Map
+-keep class com.google.android.gms.maps.** { ; }
+-keep interface com.google.android.gms.maps.* { *; }
+# End

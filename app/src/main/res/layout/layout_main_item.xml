@@ -54,7 +54,7 @@
 
                         <TextView
                             android:id="@+id/txtCustName"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:maxLines="2"
@@ -67,7 +67,7 @@
 
                         <TextView
                             android:id="@+id/txtOrderNum"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:maxLines="1"
@@ -83,7 +83,7 @@
 
                     <TextView
                         android:id="@+id/txtDescription"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="2"
                         android:text="ปูสนามหลังบ้าน"
@@ -111,7 +111,7 @@
 
                             <TextView
                                 android:id="@+id/txtDate"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="3dp"
                                 android:gravity="center_vertical"
@@ -134,7 +134,7 @@
 
                             <TextView
                                 android:id="@+id/txtLocation"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginLeft="3dp"
                                 android:gravity="center_vertical"
@@ -163,6 +163,7 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/btnDueDate"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
@@ -195,6 +196,7 @@
                     android:textColor="@android:color/black"></View>
 
                 <LinearLayout
+                    android:id="@+id/btnAction"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
