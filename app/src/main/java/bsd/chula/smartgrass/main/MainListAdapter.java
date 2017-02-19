@@ -1,6 +1,6 @@
 package bsd.chula.smartgrass.main;
 
-import android.annotation.TargetApi;
+
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.support.v7.widget.AppCompatImageView;
@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.txusballesteros.widgets.FitChart;
@@ -68,15 +69,6 @@ public class MainListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         viewHolder.chartView.setMinValue(0f);
         viewHolder.chartView.setMaxValue(100f);
 
-        Collection<FitChartValue> values = new ArrayList<>();
-        values.add(new FitChartValue(20f, R.color.colorStatus1));
-        values.add(new FitChartValue(40f, R.color.colorStatus2));
-        values.add(new FitChartValue(60f, R.color.colorStatus3));
-        values.add(new FitChartValue(80f, R.color.colorStatus4));
-        values.add(new FitChartValue(100f, R.color.colorStatus5));
-
-        viewHolder.chartView.setValues(values);
-
         onSetGateStatus(item, viewHolder);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
@@ -105,52 +97,73 @@ public class MainListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return orderList.size();
     }
 
-    private void onSetGateStatus(Order order, MainViewHolder viewHolder) {
+    private void onSetGateStatus(final Order order, MainViewHolder viewHolder) {
 
         if (order.getStatus().getId() == 1) {
 
+            viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(R.color.colorStatus1));
             viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus1),
                     PorterDuff.Mode.SRC_IN);
             viewHolder.imgAction.setColorFilter(context.getResources().getColor(R.color.colorStatus1),
                     PorterDuff.Mode.SRC_IN);
 
-            viewHolder.chartView.setValue(20);
+            Collection<FitChartValue> values = new ArrayList<>();
+            values.add(new FitChartValue(20f, context.getResources().getColor(R.color.colorStatus1)));
+
+            viewHolder.chartView.setValues(values);
 
         } else if (order.getStatus().getId() == 2) {
 
+            viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(R.color.colorStatus2));
             viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus2),
                     PorterDuff.Mode.SRC_IN);
             viewHolder.imgAction.setColorFilter(context.getResources().getColor(R.color.colorStatus2),
                     PorterDuff.Mode.SRC_IN);
 
-            viewHolder.chartView.setValue(40);
+            Collection<FitChartValue> values = new ArrayList<>();
+            values.add(new FitChartValue(40f, context.getResources().getColor(R.color.colorStatus2)));
+
+            viewHolder.chartView.setValues(values);
 
         } else if (order.getStatus().getId() == 3) {
 
+            viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(R.color.colorStatus3));
             viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus3),
                     PorterDuff.Mode.SRC_IN);
             viewHolder.imgAction.setColorFilter(context.getResources().getColor(R.color.colorStatus3),
                     PorterDuff.Mode.SRC_IN);
 
-            viewHolder.chartView.setValue(60);
+            Collection<FitChartValue> values = new ArrayList<>();
+            values.add(new FitChartValue(60f, context.getResources().getColor(R.color.colorStatus3)));
+
+            viewHolder.chartView.setValues(values);
 
         } else if (order.getStatus().getId() == 4) {
 
+            viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(R.color.colorStatus4));
             viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus4),
                     PorterDuff.Mode.SRC_IN);
             viewHolder.imgAction.setColorFilter(context.getResources().getColor(R.color.colorStatus4),
                     PorterDuff.Mode.SRC_IN);
 
-            viewHolder.chartView.setValue(80);
+            Collection<FitChartValue> values = new ArrayList<>();
+            values.add(new FitChartValue(80f, context.getResources().getColor(R.color.colorStatus4)));
+
+            viewHolder.chartView.setValues(values);
+
 
         } else if (order.getStatus().getId() == 5) {
 
+            viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(R.color.colorStatus5));
             viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus5),
                     PorterDuff.Mode.SRC_IN);
             viewHolder.imgAction.setColorFilter(context.getResources().getColor(R.color.colorStatus5),
                     PorterDuff.Mode.SRC_IN);
 
-            viewHolder.chartView.setValue(100);
+            Collection<FitChartValue> values = new ArrayList<>();
+            values.add(new FitChartValue(100f, context.getResources().getColor(R.color.colorStatus5)));
+
+            viewHolder.chartView.setValues(values);
 
         } else {
 
@@ -188,6 +201,10 @@ public class MainListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView txtStatus;
         @BindView(R.id.layoutContainer)
         CardView layoutContainer;
+        @BindView(R.id.btnDueDate)
+        LinearLayout btnDueDate;
+        @BindView(R.id.btnAction)
+        LinearLayout btnAction;
 
         public MainViewHolder(View itemView) {
             super(itemView);

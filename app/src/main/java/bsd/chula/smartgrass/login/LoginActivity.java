@@ -55,11 +55,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         Intent mainIntent = new Intent(this, MainActivity.class);
         startActivity(mainIntent);
 
-/*
-        Intent drawIntent = new Intent(this, DrawActivity.class);
-        startActivity(drawIntent);
-*/
-
         finish();
     }
 
@@ -70,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @OnClick(R.id.btnLogin)
     public void onLoginButtonClick(View view) {
-        /*String username = editUsername.getText().toString();
+       /* String username = editUsername.getText().toString();
         String password = editPassword.getText().toString();
 
         if (username.length() == 0) {
@@ -85,8 +80,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
         presenter.login(username, password);*/
 
-        Intent drawIntent = new Intent(this, DrawActivity.class);
-        startActivity(drawIntent);
+        Intent mainActivity = new Intent(this, MainActivity.class);
+        startActivity(mainActivity);
     }
 
     private static void setDrawableLeft(EditText editText, int resourceId) {
