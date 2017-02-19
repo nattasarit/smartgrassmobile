@@ -81,7 +81,8 @@ public class GLRenderer implements Renderer {
     private void Render(float[] m) {
 
         // clear Screen and Depth Buffer, we have set the clear color as black.
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+
+        //GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 
         // get handle to vertex shader's vPosition member
         int mPositionHandle = GLES20.glGetAttribLocation(riGraphicTools.sp_SolidColor, "vPosition");
@@ -141,10 +142,10 @@ public class GLRenderer implements Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
-        // Create the triangle
+        //Create the triangle
         SetupTriangle();
 
-        // Set the clear color to black
+        //Set the clear color to black
         GLES20.glClearColor(255.0f, 255.0f, 255.0f, 1);
 
         // Create the shaders
@@ -158,13 +159,16 @@ public class GLRenderer implements Renderer {
 
         // Set our shader programm
         GLES20.glUseProgram(riGraphicTools.sp_SolidColor);
+
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
     }
 
     public void SetupTriangle()
     {
         // We have create the vertices of our view.
         vertices = new float[]
-                {10.0f, 200f, 0.0f,
+                {
+                        10.0f, 200f, 0.0f,
                         10.0f, 100f, 0.0f,
                         100f, 100f, 0.0f,
                 };
@@ -185,5 +189,83 @@ public class GLRenderer implements Renderer {
         drawListBuffer.put(indices);
         drawListBuffer.position(0);
 
+    }
+
+    float x1 = 10.0f;
+    float y1 = 200.0f;
+
+    float x2 = 10.0f;
+    float y2 = 100.0f;
+
+    float x3 = 100.0f;
+    float y3 = 100.0f;
+    public void Test(){
+        x1+=20f;
+        y1+=20f;
+
+        x2+=20f;
+        y2+=20f;
+
+        x3+=20f;
+        y3+=20f;
+
+        // We have create the vertices of our view.
+        vertices = new float[]
+                {
+                        x1, y1, 0.0f,
+                        x2, y2, 0.0f,
+                        x3, y3, 0.0f,
+                };
+
+        indices = new short[] {0, 1, 2}; // loop in the android official tutorial opengles why different order.
+
+        // The vertex buffer.
+        ByteBuffer bb = ByteBuffer.allocateDirect(vertices.length * 4);
+        bb.order(ByteOrder.nativeOrder());
+        vertexBuffer = bb.asFloatBuffer();
+        vertexBuffer.put(vertices);
+        vertexBuffer.position(0);
+
+        // initialize byte buffer for the draw list
+        ByteBuffer dlb = ByteBuffer.allocateDirect(indices.length * 2);
+        dlb.order(ByteOrder.nativeOrder());
+        drawListBuffer = dlb.asShortBuffer();
+        drawListBuffer.put(indices);
+        drawListBuffer.position(0);
+
+    }
+
+    float a1 = 300.0f;
+    float b1 = 0.0f;
+
+    float a2 = 500.0f;
+    float b2 = 500.0f;
+    float[] lastPoint = new float[3];
+    public void DrawLine(float length, float angle) {
+        vertices = new float[]
+                {
+                        a1, b1, 0.0f,
+                        a2, b2, 0.0f,
+                };
+
+        lastPoint[0] = vertices[4];
+        lastPoint[1] = vertices[5];
+        lastPoint[2] = vertices[6];
+
+        indices = new short[] {0, 1, 2}; // loop in the android official tutorial opengles why different order.
+
+        // The vertex buffer.
+        ByteBuffer bb = ByteBuffer.allocateDirect(vertices.length * 4);
+        bb.order(ByteOrder.nativeOrder());
+        vertexBuffer = bb.asFloatBuffer();
+        vertexBuffer.put(vertices);
+        vertexBuffer.position(0);
+
+        // initialize byte buffer for the draw list
+        ByteBuffer dlb = ByteBuffer.allocateDirect(indices.length * 2);
+        dlb.order(ByteOrder.nativeOrder());
+        drawListBuffer = dlb.asShortBuffer();
+        drawListBuffer.put(indices);
+        drawListBuffer.position(0);
     }
 }

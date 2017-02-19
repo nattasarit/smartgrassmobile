@@ -20,7 +20,7 @@ import bsd.chula.smartgrass.draw.GLSurf;
 public class DrawActivity extends Activity {
 
     // Our OpenGL Surfaceview
-    private GLSurfaceView glSurfaceView;
+    private GLSurf glSurfaceView;
 
     @BindView(R.id.editLength)
     EditText editLength;
@@ -54,6 +54,9 @@ public class DrawActivity extends Activity {
         RelativeLayout.LayoutParams glParams = new RelativeLayout.LayoutParams(900, 900);
 
         layout.addView(glSurfaceView, glParams);
+
+        ButterKnife.bind(this);
+
     }
 
     @Override
@@ -71,10 +74,20 @@ public class DrawActivity extends Activity {
 
     @OnClick(R.id.btnDraw)
     public void onDrawButtonClick(View view) {
-        String lenght = editLength.getText().toString();
-        String angle = editAngle.getText().toString();
+        float lenght = 0.0f;
+        if(editLength.getText().toString().length() > 0){
+            lenght = Float.valueOf(editLength.getText().toString());
+        }
 
-        //glSurfaceView.
+        float angle = 0.0f;
+        if(editLength.getText().toString().length() > 0) {
+            angle = Float.valueOf(editAngle.getText().toString());
+        }
+
+
+        glSurfaceView.DrawLine(lenght,angle);
+
+
     }
 
 }

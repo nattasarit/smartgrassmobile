@@ -9,7 +9,7 @@ import android.opengl.GLSurfaceView;
 
 public class GLSurf extends GLSurfaceView {
 
-    private final GLRenderer mRenderer;
+    private GLRenderer mRenderer;
 
     public GLSurf(Context context) {
         super(context);
@@ -40,8 +40,8 @@ public class GLSurf extends GLSurfaceView {
         mRenderer.onResume();
     }
 
-    public void drawLine(){
-
+    public void DrawLine(Float length, Float angle){
+        mRenderer.DrawLine(length,angle);
     }
 
 }
