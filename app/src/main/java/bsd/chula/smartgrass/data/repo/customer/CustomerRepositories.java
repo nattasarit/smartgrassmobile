@@ -1,4 +1,4 @@
-package bsd.chula.smartgrass.data.customer;
+package bsd.chula.smartgrass.data.repo.customer;
 
 /**
  * Created by Dev_Tee on 1/28/17.

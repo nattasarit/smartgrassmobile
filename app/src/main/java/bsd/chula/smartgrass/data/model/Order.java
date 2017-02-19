@@ -1,4 +1,4 @@
-package bsd.chula.smartgrass.data.task;
+package bsd.chula.smartgrass.data.model;
 
 import java.util.Date;
 
@@ -9,14 +9,12 @@ import io.realm.annotations.PrimaryKey;
  * Created by Dev_Tee on 1/28/17.
  */
 
-public class Task extends RealmObject{
+public class Order extends RealmObject{
 
     @PrimaryKey
     private int id;
 
-    private String firstName;
-
-    private String lastName;
+    private Customer customer;
 
     private String description;
 
@@ -26,7 +24,7 @@ public class Task extends RealmObject{
 
     private double lng;
 
-    private String status;
+    private Status status;
 
     public int getId() {
         return id;
@@ -36,28 +34,20 @@ public class Task extends RealmObject{
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     public String getDateTime() {
@@ -84,11 +74,11 @@ public class Task extends RealmObject{
         this.lng = lng;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }

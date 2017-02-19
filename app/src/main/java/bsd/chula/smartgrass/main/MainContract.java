@@ -2,7 +2,7 @@ package bsd.chula.smartgrass.main;
 
 import java.util.List;
 
-import bsd.chula.smartgrass.data.task.Task;
+import bsd.chula.smartgrass.data.model.Order;
 
 /**
  * Created by Dev_Tee on 1/28/17.
@@ -12,11 +12,11 @@ public interface MainContract {
 
     interface View {
 
-        void showAllTasks(List<Task> taskList);
+        void showAllTasks(List<Order> orderList);
 
         void showErrorDialog(String msg);
 
-        void showTaskDetailUI(Task task);
+        void showTaskDetailUI(Order order);
 
     }
 
@@ -36,14 +36,14 @@ public interface MainContract {
 
     interface GetAllTaskListener {
 
-        void onGetAllTaskSuccess(List<Task> taskList);
+        void onGetAllTaskSuccess(List<Order> orderList);
 
         void onGetAllTaskError(String msg);
     }
 
     interface GetTaskListener {
 
-        void onGetTaskSuccess(Task task);
+        void onGetTaskSuccess(Order order);
 
         void onGetTaskError(String msg);
     }

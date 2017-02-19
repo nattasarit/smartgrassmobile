@@ -24,13 +24,12 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <EditText
+        <android.support.v7.widget.AppCompatEditText
             android:id="@+id/editUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:background="@drawable/round_30dp_darker_gray_transparent"
-            android:drawableLeft="@drawable/ic_username"
             android:hint="@string/login_hint_username"
             android:padding="15dp"
             android:paddingLeft="10dp"
@@ -41,12 +40,11 @@
             android:layout_width="match_parent"
             android:layout_height="10dp"></View>
 
-        <EditText
+        <android.support.v7.widget.AppCompatEditText
             android:id="@+id/editPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round_30dp_darker_gray_transparent"
-            android:drawableLeft="@drawable/ic_password"
             android:hint="@string/login_hint_password"
             android:padding="15dp"
             android:paddingLeft="10dp"

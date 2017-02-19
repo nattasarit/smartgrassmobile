@@ -1,6 +1,8 @@
-package bsd.chula.smartgrass.data.customer;
+package bsd.chula.smartgrass.data.repo.customer;
 
 import java.util.List;
+
+import bsd.chula.smartgrass.data.model.Customer;
 
 /**
  * Created by Dev_Tee on 1/28/17.

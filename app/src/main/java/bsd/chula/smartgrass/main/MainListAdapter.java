@@ -1,5 +1,6 @@
 package bsd.chula.smartgrass.main;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.PorterDuff;
 import android.support.v7.widget.AppCompatImageView;
@@ -11,15 +12,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.txusballesteros.widgets.FitChart;
+import com.txusballesteros.widgets.FitChartValue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import bsd.chula.smartgrass.R;
-import bsd.chula.smartgrass.data.task.Task;
+import bsd.chula.smartgrass.data.model.Order;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -30,18 +33,18 @@ import butterknife.ButterKnife;
 public class MainListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
-    private List<Task> taskList;
+    private List<Order> orderList;
     private OnTaskItemClick taskItemClick;
 
     public MainListAdapter(Context context, OnTaskItemClick taskItemClick) {
         this.context = context;
 
-        taskList = new ArrayList<>();
+        orderList = new ArrayList<>();
         this.taskItemClick = taskItemClick;
     }
 
-    public void appendItems(List<Task> taskList) {
-        this.taskList.addAll(taskList);
+    public void appendItems(List<Order> orderList) {
+        this.orderList.addAll(orderList);
         notifyDataSetChanged();
     }
 
@@ -55,16 +58,26 @@ public class MainListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         MainViewHolder viewHolder = (MainViewHolder) holder;
-        final Task item = taskList.get(position);
+        final Order item = orderList.get(position);
 
-        viewHolder.txtCustName.setText(item.getFirstName() + " " + item.getLastName());
+        viewHolder.txtCustName.setText(item.getCustomer().getFirstName() + " " + item.getCustomer().getLastName());
         viewHolder.txtDescription.setText(item.getDescription());
 
         viewHolder.txtOrderNum.setText("Order 0" + item.getId());
 
         viewHolder.chartView.setMinValue(0f);
         viewHolder.chartView.setMaxValue(100f);
-        viewHolder.chartView.setValue(80f);
+
+        Collection<FitChartValue> values = new ArrayList<>();
+        values.add(new FitChartValue(20f, R.color.colorStatus1));
+        values.add(new FitChartValue(40f, R.color.colorStatus2));
+        values.add(new FitChartValue(60f, R.color.colorStatus3));
+        values.add(new FitChartValue(80f, R.color.colorStatus4));
+        values.add(new FitChartValue(100f, R.color.colorStatus5));
+
+        viewHolder.chartView.setValues(values);
+
+        onSetGateStatus(item, viewHolder);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         try {
@@ -76,26 +89,9 @@ public class MainListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             e.printStackTrace();
         }
 
-        if (position % 2 == 0) {
-            viewHolder.imgAlert.setColorFilter(context.getResources().getColor(android.R.color.holo_red_dark),
-                    PorterDuff.Mode.SRC_IN);
-            viewHolder.imgAction.setColorFilter(context.getResources().getColor(android.R.color.holo_green_dark),
-                    PorterDuff.Mode.SRC_IN);
+        viewHolder.txtStatus.setText(item.getStatus().getName());
 
-        } else {
-            viewHolder.imgAlert.setColorFilter(context.getResources().getColor(android.R.color.holo_green_dark),
-                    PorterDuff.Mode.SRC_IN);
-            viewHolder.imgAction.setColorFilter(context.getResources().getColor(android.R.color.holo_orange_dark),
-                    PorterDuff.Mode.SRC_IN);
-        }
-
-        if (position % 2 != 0) {
-            viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(android.R.color.holo_blue_dark));
-        } else {
-            viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(android.R.color.holo_orange_dark));
-        }
-
-        viewHolder.container.setOnClickListener(new View.OnClickListener() {
+        viewHolder.layoutContainer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 taskItemClick.onTaskItemClick(item);
@@ -106,13 +102,68 @@ public class MainListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return taskList.size();
+        return orderList.size();
+    }
+
+    private void onSetGateStatus(Order order, MainViewHolder viewHolder) {
+
+        if (order.getStatus().getId() == 1) {
+
+            viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus1),
+                    PorterDuff.Mode.SRC_IN);
+            viewHolder.imgAction.setColorFilter(context.getResources().getColor(R.color.colorStatus1),
+                    PorterDuff.Mode.SRC_IN);
+
+            viewHolder.chartView.setValue(20);
+
+        } else if (order.getStatus().getId() == 2) {
+
+            viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus2),
+                    PorterDuff.Mode.SRC_IN);
+            viewHolder.imgAction.setColorFilter(context.getResources().getColor(R.color.colorStatus2),
+                    PorterDuff.Mode.SRC_IN);
+
+            viewHolder.chartView.setValue(40);
+
+        } else if (order.getStatus().getId() == 3) {
+
+            viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus3),
+                    PorterDuff.Mode.SRC_IN);
+            viewHolder.imgAction.setColorFilter(context.getResources().getColor(R.color.colorStatus3),
+                    PorterDuff.Mode.SRC_IN);
+
+            viewHolder.chartView.setValue(60);
+
+        } else if (order.getStatus().getId() == 4) {
+
+            viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus4),
+                    PorterDuff.Mode.SRC_IN);
+            viewHolder.imgAction.setColorFilter(context.getResources().getColor(R.color.colorStatus4),
+                    PorterDuff.Mode.SRC_IN);
+
+            viewHolder.chartView.setValue(80);
+
+        } else if (order.getStatus().getId() == 5) {
+
+            viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus5),
+                    PorterDuff.Mode.SRC_IN);
+            viewHolder.imgAction.setColorFilter(context.getResources().getColor(R.color.colorStatus5),
+                    PorterDuff.Mode.SRC_IN);
+
+            viewHolder.chartView.setValue(100);
+
+        } else {
+
+            viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(android.R.color.white));
+            viewHolder.imgAlert.clearColorFilter();
+            viewHolder.imgAction.clearColorFilter();
+            viewHolder.chartView.setValue(0);
+        }
+
     }
 
     public class MainViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.container)
-        CardView container;
         @BindView(R.id.viewGate)
         View viewGate;
         @BindView(R.id.chartView)
@@ -129,8 +180,14 @@ public class MainListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         TextView txtLocation;
         @BindView(R.id.imgAlert)
         AppCompatImageView imgAlert;
+        @BindView(R.id.txtDueDate)
+        TextView txtDueDate;
         @BindView(R.id.imgAction)
         AppCompatImageView imgAction;
+        @BindView(R.id.txtStatus)
+        TextView txtStatus;
+        @BindView(R.id.layoutContainer)
+        CardView layoutContainer;
 
         public MainViewHolder(View itemView) {
             super(itemView);
@@ -139,6 +196,6 @@ public class MainListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public interface OnTaskItemClick {
-        void onTaskItemClick(Task task);
+        void onTaskItemClick(Order order);
     }
 }
