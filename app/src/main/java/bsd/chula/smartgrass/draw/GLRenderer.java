@@ -14,10 +14,14 @@ import javax.microedition.khronos.opengles.GL10;
 
 import android.content.Context;
 import android.opengl.GLES20;
+import android.opengl.GLES30;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.Matrix;
+import java.lang.Math;
 
 public class GLRenderer implements Renderer {
+
+
 
     // Our matrices
     private final float[] mtrxProjection = new float[16];
@@ -31,8 +35,8 @@ public class GLRenderer implements Renderer {
     public ShortBuffer drawListBuffer;
 
     // Our screenresolution
-    float   mScreenWidth = 1280;
-    float   mScreenHeight = 768;
+    float   mScreenWidth = 1440;
+    float   mScreenHeight = 1000;
 
     // Misc
     Context mContext;
@@ -75,7 +79,6 @@ public class GLRenderer implements Renderer {
 
         // Save the current time to see how long it took <img src="http://androidblog.reindustries.com/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley"> .
         mLastTime = now;
-
     }
 
     private void Render(float[] m) {
@@ -102,8 +105,9 @@ public class GLRenderer implements Renderer {
         GLES20.glUniformMatrix4fv(mtrxhandle, 1, false, m, 0);
 
         // Draw the triangle
-        GLES20.glDrawElements(GLES20.GL_TRIANGLES, indices.length,
+        GLES20.glDrawElements(GLES20.GL_LINES, indices.length,
                 GLES20.GL_UNSIGNED_SHORT, drawListBuffer);
+        GLES20.glLineWidth(5.0f);
 
         // Disable vertex array
         GLES20.glDisableVertexAttribArray(mPositionHandle);
@@ -142,6 +146,7 @@ public class GLRenderer implements Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
+
         //Create the triangle
         SetupTriangle();
 
@@ -166,11 +171,18 @@ public class GLRenderer implements Renderer {
     public void SetupTriangle()
     {
         // We have create the vertices of our view.
+//        vertices = new float[]
+//                {
+//                        10.0f, 200f, 0.0f,
+//                        10.0f, 100f, 0.0f,
+//                        100f, 100f, 0.0f,
+//                };
+
         vertices = new float[]
                 {
-                        10.0f, 200f, 0.0f,
-                        10.0f, 100f, 0.0f,
-                        100f, 100f, 0.0f,
+                        0.0f, 0.0f, 0.0f,
+                        0.0f, 0.0f, 0.0f,
+                        0.0f, 0.0f, 0.0f,
                 };
 
         indices = new short[] {0, 1, 2}; // loop in the android official tutorial opengles why different order.
@@ -181,6 +193,8 @@ public class GLRenderer implements Renderer {
         vertexBuffer = bb.asFloatBuffer();
         vertexBuffer.put(vertices);
         vertexBuffer.position(0);
+
+
 
         // initialize byte buffer for the draw list
         ByteBuffer dlb = ByteBuffer.allocateDirect(indices.length * 2);
@@ -235,24 +249,55 @@ public class GLRenderer implements Renderer {
 
     }
 
-    float a1 = 300.0f;
-    float b1 = 0.0f;
+    public void Test2(){
+        Line eastHorz = new Line();
+        eastHorz.draw();
+    }
 
-    float a2 = 500.0f;
-    float b2 = 500.0f;
-    float[] lastPoint = new float[3];
+
+    float[] previusEndPoint = null;
     public void DrawLine(float length, float angle) {
+
+
+
+        float[] startPoint;
+        float[] endPoint;
+
+        if(previusEndPoint == null){
+            previusEndPoint = new float[3];
+
+            startPoint = new float[]{
+                    300.0f, 0.0f, 0.0f
+            };
+
+//            endPoint = new float[]{
+//                    300.0f, 100.0f, 0.0f
+//            };
+
+            endPoint = calEndPoint(startPoint, length, angle);
+        }
+        else{
+            startPoint = previusEndPoint;
+
+//            float end = previusEndPoint[1] + length;
+//            endPoint =new float[]{
+//                    300.0f, end, 0.0f
+//            };
+            endPoint = calEndPoint(startPoint, length, angle);
+        }
+
         vertices = new float[]
                 {
-                        a1, b1, 0.0f,
-                        a2, b2, 0.0f,
+                        startPoint[0], startPoint[1], startPoint[2],
+                        endPoint[0], endPoint[1], endPoint[2]
                 };
 
-        lastPoint[0] = vertices[4];
-        lastPoint[1] = vertices[5];
-        lastPoint[2] = vertices[6];
+        previusEndPoint = new float[]{
+                vertices[3], vertices[4], vertices[5]
+        };
 
-        indices = new short[] {0, 1, 2}; // loop in the android official tutorial opengles why different order.
+
+        indices = new short[] {0, 1}; // loop in the android official tutorial opengles why different order.
 
         // The vertex buffer.
         ByteBuffer bb = ByteBuffer.allocateDirect(vertices.length * 4);
@@ -267,5 +312,28 @@ public class GLRenderer implements Renderer {
         drawListBuffer = dlb.asShortBuffer();
         drawListBuffer.put(indices);
         drawListBuffer.position(0);
+    }
+
+    private float[] calEndPoint(float[] startPoint, float length, float angle) {
+        float[] endpoint = new float[3];
+
+        //angle = Math.abs(angle-90);
+        //angle = (float)(angle * 0.017453292519);
+
+        angle = (float)Math.toDegrees(angle);
+        if (angle < 0.0f) {
+            angle += 360.0f;
+        }
+
+
+        float pointX = startPoint[0] + (float)(Math.cos(angle) * length);
+        float pointY = startPoint[1] + (float)(Math.sin(angle) * length);
+        float pointZ = 0.0f;
+
+        endpoint = new float[]{
+                pointX, pointY, pointZ
+        };
+
+        return endpoint;
     }
 }

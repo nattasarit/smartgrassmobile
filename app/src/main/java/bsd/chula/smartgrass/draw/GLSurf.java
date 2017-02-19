@@ -42,6 +42,7 @@ public class GLSurf extends GLSurfaceView {
 
     public void DrawLine(Float length, Float angle){
         mRenderer.DrawLine(length,angle);
+        //mRenderer.Test2();
     }
 
 }

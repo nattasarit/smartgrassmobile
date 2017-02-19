@@ -80,7 +80,7 @@ public class DrawActivity extends Activity {
         }
 
         float angle = 0.0f;
-        if(editLength.getText().toString().length() > 0) {
+        if(editAngle.getText().toString().length() > 0) {
             angle = Float.valueOf(editAngle.getText().toString());
         }
 
