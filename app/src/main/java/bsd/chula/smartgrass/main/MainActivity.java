@@ -1,5 +1,7 @@
 package bsd.chula.smartgrass.main;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,9 @@ import java.util.List;
 
 import bsd.chula.smartgrass.R;
 import bsd.chula.smartgrass.data.model.Order;
+import bsd.chula.smartgrass.draw.DrawActivity;
+import bsd.chula.smartgrass.main.dialog.MainBottomSheetFragment;
+import bsd.chula.smartgrass.navigate.NavigateActivity;
 import bsd.chula.smartgrass.utils.SpacesItemDecoration;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
+    private Context context;
     private MainPresenter presenter;
     private MainListAdapter adapter;
 
@@ -31,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        context = this;
 
         presenter = new MainPresenter(getApplicationContext(), this);
         adapter = new MainListAdapter(getApplicationContext(), onTaskItemClick);
@@ -73,7 +81,11 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
     MainListAdapter.OnTaskItemClick onTaskItemClick = new MainListAdapter.OnTaskItemClick() {
         @Override
         public void onTaskItemClick(Order order) {
-            presenter.loadTask(order.getId());
+        //    presenter.loadTask(order.getId());
+
+            MainBottomSheetFragment fragment = MainBottomSheetFragment.newInstance(order);
+            fragment.show(getSupportFragmentManager(), fragment.getTag());
+
         }
     };
 }
