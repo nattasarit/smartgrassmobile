@@ -1,8 +1,7 @@
 package bsd.chula.smartgrass.draw;
 
-import android.opengl.GLSurfaceView;
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -10,12 +9,9 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import bsd.chula.smartgrass.R;
-import bsd.chula.smartgrass.login.LoginPresenter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import bsd.chula.smartgrass.draw.GLSurf;
 
 public class DrawActivity extends Activity {
 
