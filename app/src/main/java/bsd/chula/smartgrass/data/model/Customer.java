@@ -1,4 +1,4 @@
-package bsd.chula.smartgrass.data.customer;
+package bsd.chula.smartgrass.data.model;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -18,7 +18,7 @@ public class Customer extends RealmObject{
 
     private String address;
 
-    private int telephone;
+    private String telephone;
 
     private String email;
 
@@ -54,11 +54,11 @@ public class Customer extends RealmObject{
         this.address = address;
     }
 
-    public int getTelephone() {
+    public String getTelephone() {
         return telephone;
     }
 
-    public void setTelephone(int telephone) {
+    public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
 

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
+    android:id="@+id/layoutContainer"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,9 +37,7 @@
                     android:layout_margin="10dp"
                     android:background="@android:color/transparent"
                     app:animationMode="overdraw"
-                    app:backStrokeColor="@color/gray_bg"
-                    app:strokeSize="10dp"
-                    app:valueStrokeColor="@android:color/holo_green_dark" />
+                    app:strokeSize="10dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -57,7 +57,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:maxLines="1"
+                            android:maxLines="2"
                             android:text="คุณกิตติศักดิ์ บัวพันนา"
                             android:textColor="@android:color/black" />
 
@@ -177,7 +177,7 @@
                         app:srcCompat="@drawable/ic_alert" />
 
                     <TextView
-                        android:id="@+id/textView"
+                        android:id="@+id/txtDueDate"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
@@ -208,7 +208,7 @@
                         app:srcCompat="@drawable/ic_play" />
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/txtStatus"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"

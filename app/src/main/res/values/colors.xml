@@ -8,4 +8,12 @@
     <color name="gray_line">#b7b7b7</color>
     <color name="gray_bg">#f4f4f4</color>
     <color name="red">#990000</color>
+
+    <!-- Status Gate -->
+    <color name="colorStatus1">#ffcc0000</color>
+    <color name="colorStatus2">#ffff8800</color>
+    <color name="colorStatus3">#ffaa66cc</color>
+    <color name="colorStatus4">#ffffbb33</color>
+    <color name="colorStatus5">#ff669900</color>
+
 </resources>
