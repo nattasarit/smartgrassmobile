@@ -18,6 +18,7 @@ import bsd.chula.smartgrass.data.model.Order;
 import bsd.chula.smartgrass.draw.DrawActivity;
 import bsd.chula.smartgrass.navigate.NavigateActivity;
 import bsd.chula.smartgrass.utils.SpacesItemDecoration;
+import bsd.chula.smartgrass.web.WebViewActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -104,12 +105,18 @@ public class MainBottomSheetFragment extends BottomSheetDialogFragment {
         object5.setRes(R.drawable.ic_calendar);
         object5.setTitle(context.getString(R.string.main_dialog_event_deliver));
 
+        MainDialogObject object6 = new MainDialogObject();
+        object6.setId(6);
+        object6.setRes(R.drawable.ic_alert);
+        object6.setTitle("ประเมินหน้างาน - WebView");
+
         switch (order.getStatus().getId()) {
 
             case 1: {
 
                 results.add(object1);
                 results.add(object2);
+                results.add(object6);
 
             } break;
 
@@ -163,6 +170,21 @@ public class MainBottomSheetFragment extends BottomSheetDialogFragment {
 
                     Intent directionIntent = new Intent(context, NavigateActivity.class);
                     context.startActivity(directionIntent);
+
+                } break;
+
+                case 4: {
+
+                } break;
+
+                case 5: {
+
+                } break;
+
+                case 6: {
+
+                    Intent webViewIntent = new Intent(context, WebViewActivity.class);
+                    context.startActivity(webViewIntent);
 
                 } break;
             }
