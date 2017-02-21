@@ -11,13 +11,18 @@ import java.nio.ShortBuffer;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+import javax.microedition.khronos.opengles.GL10Ext;
 
 import android.content.Context;
+import android.opengl.GLES10;
+import android.opengl.GLES10Ext;
 import android.opengl.GLES20;
 import android.opengl.GLES30;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.Matrix;
 import java.lang.Math;
+import android.view.ScaleGestureDetector;
+import android.view.MotionEvent;
 
 public class GLRenderer implements Renderer {
 
@@ -60,6 +65,7 @@ public class GLRenderer implements Renderer {
         mLastTime = System.currentTimeMillis();
     }
 
+
     @Override
     public void onDrawFrame(GL10 unused) {
 
@@ -77,8 +83,12 @@ public class GLRenderer implements Renderer {
         // Render our example
         Render(mtrxProjectionAndView);
 
+
+
         // Save the current time to see how long it took <img src="http://androidblog.reindustries.com/wp-includes/images/smilies/icon_smile.gif" alt=":)" class="wp-smiley"> .
         mLastTime = now;
+
+
     }
 
     private void Render(float[] m) {
@@ -267,7 +277,7 @@ public class GLRenderer implements Renderer {
             previusEndPoint = new float[3];
 
             startPoint = new float[]{
-                    300.0f, 0.0f, 0.0f
+                    700.0f, 1200.0f, 0.0f
             };
 
 //            endPoint = new float[]{
@@ -361,4 +371,10 @@ public class GLRenderer implements Renderer {
 
         return endpoint;
     }
+
+
+
+
+
+
 }
