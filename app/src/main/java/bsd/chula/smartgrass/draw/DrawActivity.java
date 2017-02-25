@@ -13,6 +13,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+<<<<<<< HEAD
+import bsd.chula.smartgrass.draw.GLSurf;
+import android.view.View.OnTouchListener;
+import java.lang.Object;
+import android.view.InputEvent;
+import android.view.MotionEvent;
+
+=======
+>>>>>>> c090feb6ecbed8b02b07156d609d59c2df595eb1
 public class DrawActivity extends Activity {
 
     // Our OpenGL Surfaceview
@@ -29,6 +38,7 @@ public class DrawActivity extends Activity {
 
         // Turn off the window's title bar
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+
 
         // Super
         super.onCreate(savedInstanceState);
@@ -47,13 +57,28 @@ public class DrawActivity extends Activity {
 
         // Attach our surfaceview to our relative layout from our main layout.
         //RelativeLayout.LayoutParams glParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        RelativeLayout.LayoutParams glParams = new RelativeLayout.LayoutParams(1280, 1280);
+        //RelativeLayout.LayoutParams glParams = new RelativeLayout.LayoutParams(1280, 1280);
+
+        RelativeLayout.LayoutParams glParams = new RelativeLayout.LayoutParams(2560, 1440);
 
         layout.addView(glSurfaceView, glParams);
+
+
+        glSurfaceView.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Interpret MotionEvent data
+                // Handle touch here
+                return true;
+            }
+        });
 
         ButterKnife.bind(this);
 
     }
+
+
+
 
     @Override
     protected void onPause() {

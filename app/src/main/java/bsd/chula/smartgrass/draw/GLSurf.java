@@ -6,6 +6,8 @@ package bsd.chula.smartgrass.draw;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
+import android.view.MotionEvent;
+import android.os.Bundle;
 
 public class GLSurf extends GLSurfaceView {
 
@@ -26,6 +28,23 @@ public class GLSurf extends GLSurfaceView {
         setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
 
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+        switch (action) {
+            case (MotionEvent.ACTION_DOWN): // Touch screen pressed
+                break;
+            case (MotionEvent.ACTION_UP): // Touch screen touch ended
+                break;
+            case (MotionEvent.ACTION_MOVE): // Contact has moved across screen
+                break;
+            case (MotionEvent.ACTION_CANCEL): // Touch event cancelled
+                break;
+        }
+        return super.onTouchEvent(event);
+    }
+
     @Override
     public void onPause() {
         // TODO Auto-generated method stub
@@ -44,6 +63,8 @@ public class GLSurf extends GLSurfaceView {
         mRenderer.DrawLine(length,angle);
         //mRenderer.Test2();
     }
+
+
 
 }
 
