@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bsd.chula.smartgrass.R;
+import bsd.chula.smartgrass.checktoreceive.CheckToReceiveActivity;
 import bsd.chula.smartgrass.data.model.Order;
 import bsd.chula.smartgrass.draw.DrawActivity;
 import bsd.chula.smartgrass.navigate.NavigateActivity;
@@ -174,6 +175,9 @@ public class MainBottomSheetFragment extends BottomSheetDialogFragment {
                 } break;
 
                 case 4: {
+
+                    Intent checkToReceiveIntent = new Intent(context, CheckToReceiveActivity.class);
+                    context.startActivity(checkToReceiveIntent);
 
                 } break;
 

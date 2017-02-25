@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="bsd.chula.smartgrass">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-feature
@@ -34,6 +36,8 @@
         <activity android:name=".draw.DrawActivity" />
 
         <activity android:name=".navigate.NavigateActivity" />
+
+        <activity android:name=".checktoreceive.CheckToReceiveActivity"/>
 
         <activity
             android:name=".sign.SignActivity"
