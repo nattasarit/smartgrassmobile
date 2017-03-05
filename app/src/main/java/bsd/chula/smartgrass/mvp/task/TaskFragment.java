@@ -12,11 +12,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import java.util.List;
 
 import bsd.chula.smartgrass.R;
-import bsd.chula.smartgrass.data.model.Order;
+import bsd.chula.smartgrass.data.model.Work;
 import bsd.chula.smartgrass.mvp.task.dialog.TaskBottomSheetFragment;
 import bsd.chula.smartgrass.utils.SpacesItemDecoration;
 import butterknife.BindView;
@@ -30,6 +31,8 @@ public class TaskFragment extends Fragment implements TaskContract.View {
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     private Context context;
     private TaskPresenter presenter;
@@ -43,13 +46,14 @@ public class TaskFragment extends Fragment implements TaskContract.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+        getActivity().setTitle("ระบบงาน");
 
         context = getActivity();
 
         presenter = new TaskPresenter(context, this);
         adapter = new TaskListAdapter(context, onTaskItemClick);
     }
-
 
     @Nullable
     @Override
@@ -81,10 +85,11 @@ public class TaskFragment extends Fragment implements TaskContract.View {
         recyclerView.setAdapter(adapter);
     }
 
-    @Override
-    public void showAllTasks(List<Order> orderList) {
 
-        adapter.appendItems(orderList);
+    @Override
+    public void showAllTasks(List<Work> workList) {
+        progressBar.setVisibility(View.GONE);
+        adapter.appendItems(workList);
     }
 
     @Override
@@ -93,7 +98,7 @@ public class TaskFragment extends Fragment implements TaskContract.View {
     }
 
     @Override
-    public void showTaskDetailUI(Order order) {
+    public void showTaskDetailUI(Work work) {
 
     }
 
@@ -108,10 +113,11 @@ public class TaskFragment extends Fragment implements TaskContract.View {
     }
 
     TaskListAdapter.OnTaskItemClick onTaskItemClick = new TaskListAdapter.OnTaskItemClick() {
-        @Override
-        public void onTaskItemClick(Order order) {
 
-            TaskBottomSheetFragment fragment = TaskBottomSheetFragment.newInstance(order);
+        @Override
+        public void onTaskItemClick(Work work) {
+
+            TaskBottomSheetFragment fragment = TaskBottomSheetFragment.newInstance(work);
             fragment.show(getChildFragmentManager(), fragment.getTag());
 
         }

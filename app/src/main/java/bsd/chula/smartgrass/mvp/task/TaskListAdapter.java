@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.txusballesteros.widgets.FitChart;
 import com.txusballesteros.widgets.FitChartValue;
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.List;
 
 import bsd.chula.smartgrass.R;
 import bsd.chula.smartgrass.data.model.Order;
+import bsd.chula.smartgrass.data.model.Work;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -34,18 +36,18 @@ import butterknife.ButterKnife;
 public class TaskListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
-    private List<Order> orderList;
+    private List<Work> workList;
     private OnTaskItemClick taskItemClick;
 
     public TaskListAdapter(Context context, OnTaskItemClick taskItemClick) {
         this.context = context;
 
-        orderList = new ArrayList<>();
+        workList = new ArrayList<>();
         this.taskItemClick = taskItemClick;
     }
 
-    public void appendItems(List<Order> orderList) {
-        this.orderList.addAll(orderList);
+    public void appendItems(List<Work> works) {
+        this.workList.addAll(works);
         notifyDataSetChanged();
     }
 
@@ -59,12 +61,12 @@ public class TaskListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
         MainViewHolder viewHolder = (MainViewHolder) holder;
-        final Order item = orderList.get(position);
+        final Work item = workList.get(position);
 
-        viewHolder.txtCustName.setText(item.getCustomer().getFirstName() + " " + item.getCustomer().getLastName());
-        viewHolder.txtDescription.setText(item.getDescription());
+        viewHolder.txtCustName.setText(item.getCustomerName());
+        viewHolder.txtDescription.setText(item.getArtificialGrassCatagoryName());
 
-        viewHolder.txtOrderNum.setText("Order 0" + item.getId());
+        viewHolder.txtOrderNum.setText("Order 0" + item.getWorkID());
 
         viewHolder.chartView.setMinValue(0f);
         viewHolder.chartView.setMaxValue(100f);
@@ -72,8 +74,10 @@ public class TaskListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         onSetGateStatus(item, viewHolder);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = new Date(System.currentTimeMillis());
+
         try {
-            Date dateFormated = dateFormat.parse(item.getDateTime());
+            Date dateFormated = dateFormat.parse(date.toString());
             String dateStr = dateFormated.toString();
 
             viewHolder.txtDate.setText(dateStr);
@@ -81,7 +85,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             e.printStackTrace();
         }
 
-        viewHolder.txtStatus.setText(item.getStatus().getName());
+        viewHolder.txtStatus.setText(item.getWorkStatusName());
 
         viewHolder.layoutContainer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,12 +98,12 @@ public class TaskListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemCount() {
-        return orderList.size();
+        return workList.size();
     }
 
-    private void onSetGateStatus(final Order order, MainViewHolder viewHolder) {
+    private void onSetGateStatus(final Work work, MainViewHolder viewHolder) {
 
-        if (order.getStatus().getId() == 1) {
+        if (work.getWorkStatusID().equalsIgnoreCase("01")) {
 
             viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(R.color.colorStatus1));
             viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus1),
@@ -112,7 +116,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             viewHolder.chartView.setValues(values);
 
-        } else if (order.getStatus().getId() == 2) {
+        } else if (work.getWorkStatusID().equalsIgnoreCase("02")) {
 
             viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(R.color.colorStatus2));
             viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus2),
@@ -125,7 +129,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             viewHolder.chartView.setValues(values);
 
-        } else if (order.getStatus().getId() == 3) {
+        } else if (work.getWorkStatusID().equalsIgnoreCase("03")) {
 
             viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(R.color.colorStatus3));
             viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus3),
@@ -138,7 +142,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             viewHolder.chartView.setValues(values);
 
-        } else if (order.getStatus().getId() == 4) {
+        } else if (work.getWorkStatusID().equalsIgnoreCase("04")) {
 
             viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(R.color.colorStatus4));
             viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus4),
@@ -152,7 +156,7 @@ public class TaskListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             viewHolder.chartView.setValues(values);
 
 
-        } else if (order.getStatus().getId() == 5) {
+        } else if (work.getWorkStatusID().equalsIgnoreCase("05")) {
 
             viewHolder.viewGate.setBackgroundColor(context.getResources().getColor(R.color.colorStatus5));
             viewHolder.imgAlert.setColorFilter(context.getResources().getColor(R.color.colorStatus5),
@@ -213,6 +217,6 @@ public class TaskListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     public interface OnTaskItemClick {
-        void onTaskItemClick(Order order);
+        void onTaskItemClick(Work work);
     }
 }

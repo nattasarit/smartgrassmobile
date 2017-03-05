@@ -14,6 +14,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIManager {
 
+    private static String BASE_URL = "http://smartgrasss.gear.host/test/";
+
     public static APIServices getService() {
 
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
@@ -23,7 +25,7 @@ public class APIManager {
 
         Retrofit restAdapter = new Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("/")
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

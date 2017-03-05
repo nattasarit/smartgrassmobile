@@ -164,7 +164,7 @@
 
                 <LinearLayout
                     android:id="@+id/btnDueDate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
@@ -197,7 +197,7 @@
 
                 <LinearLayout
                     android:id="@+id/btnAction"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal">
@@ -207,7 +207,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        app:srcCompat="@drawable/ic_play" />
+                        app:srcCompat="@drawable/ic_call" />
 
                     <TextView
                         android:id="@+id/txtStatus"
@@ -215,7 +215,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:paddingLeft="5dp"
-                        android:text="Start"
+                        android:text="Contact"
                         android:textColor="@android:color/black" />
 
                 </LinearLayout>

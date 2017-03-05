@@ -138,20 +138,11 @@ public class Grass{
 
 	@Override
  	public String toString(){
-		return 
-			"Grass{" + 
-			"path = '" + path + '\'' + 
-			",pileDenie = '" + pileDenie + '\'' + 
-			",artificialGrassRollLength = '" + artificialGrassRollLength + '\'' + 
-			",color = '" + color + '\'' + 
-			",artificialGrassCatagoryID = '" + artificialGrassCatagoryID + '\'' + 
-			",artificialGrassWidth = '" + artificialGrassWidth + '\'' + 
-			",sitchRate = '" + sitchRate + '\'' + 
-			",backing = '" + backing + '\'' + 
-			",artificialGrassName = '" + artificialGrassName + '\'' + 
-			",artificialGrassID = '" + artificialGrassID + '\'' + 
-			",pileHeight = '" + pileHeight + '\'' + 
-			",gauge = '" + gauge + '\'' + 
-			"}";
+		return
+				"Color = '" + color + '\'' +
+						"\n Length = '" + artificialGrassRollLength + '\'' +
+						" " +
+						"Width = '" + artificialGrassWidth + '\''
+			;
 		}
 }

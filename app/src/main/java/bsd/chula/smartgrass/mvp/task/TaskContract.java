@@ -3,6 +3,7 @@ package bsd.chula.smartgrass.mvp.task;
 import java.util.List;
 
 import bsd.chula.smartgrass.data.model.Order;
+import bsd.chula.smartgrass.data.model.Work;
 
 /**
  * Created by Dev_Tee on 1/28/17.
@@ -12,11 +13,11 @@ public interface TaskContract {
 
     interface View {
 
-        void showAllTasks(List<Order> orderList);
+        void showAllTasks(List<Work> workList);
 
         void showErrorDialog(String msg);
 
-        void showTaskDetailUI(Order order);
+        void showTaskDetailUI(Work work);
 
     }
 
@@ -36,14 +37,14 @@ public interface TaskContract {
 
     interface GetAllTaskListener {
 
-        void onGetAllTaskSuccess(List<Order> orderList);
+        void onGetAllTaskSuccess(List<Work> workList);
 
         void onGetAllTaskError(String msg);
     }
 
     interface GetTaskListener {
 
-        void onGetTaskSuccess(Order order);
+        void onGetTaskSuccess(Work work);
 
         void onGetTaskError(String msg);
     }

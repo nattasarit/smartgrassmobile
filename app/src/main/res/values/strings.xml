@@ -7,6 +7,9 @@
 
     <!-- Action Menu-->
     <string name="action_settings">Settings</string>
+    <string name="drawer_menu_task">ระบบงาน</string>
+    <string name="drawer_menu_suggestion">ระบบแนะนำหญ้า</string>
+    <string name="drawer_menu_logout">ออกจากระบบ</string>
 
     <!-- Login -->
     <string name="login_hint_username">ใส่ชื่อผู้ใช้</string>

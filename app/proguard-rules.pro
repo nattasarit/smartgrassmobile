@@ -39,3 +39,11 @@
 -keep class com.google.android.gms.maps.** { ; }
 -keep interface com.google.android.gms.maps.* { *; }
 # End
+
+#Glide
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
+  **[] $VALUES;
+  public *;
+}
+# End

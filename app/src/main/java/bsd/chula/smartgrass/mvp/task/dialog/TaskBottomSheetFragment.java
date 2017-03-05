@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bsd.chula.smartgrass.R;
+import bsd.chula.smartgrass.data.model.Work;
 import bsd.chula.smartgrass.mvp.checktoreceive.CheckToReceiveActivity;
 import bsd.chula.smartgrass.data.model.Order;
 import bsd.chula.smartgrass.mvp.draw.DrawActivity;
@@ -35,11 +36,11 @@ public class TaskBottomSheetFragment extends BottomSheetDialogFragment {
     private Context context;
     private TaskBottomSheetDialogAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
-    private Order order;
+    private Work work;
 
-    public static TaskBottomSheetFragment newInstance(Order newOrder) {
+    public static TaskBottomSheetFragment newInstance(Work newWork) {
         TaskBottomSheetFragment fragment = new TaskBottomSheetFragment();
-        fragment.order = newOrder;
+        fragment.work = newWork;
         return fragment;
     }
 
@@ -111,9 +112,9 @@ public class TaskBottomSheetFragment extends BottomSheetDialogFragment {
         object6.setRes(R.drawable.ic_alert);
         object6.setTitle("ประเมินหน้างาน - WebView");
 
-        switch (order.getStatus().getId()) {
+        switch (work.getWorkStatusID()) {
 
-            case 1: {
+            case "01": {
 
                 results.add(object1);
                 results.add(object2);
@@ -121,21 +122,21 @@ public class TaskBottomSheetFragment extends BottomSheetDialogFragment {
 
             } break;
 
-            case 2: {
+            case "02": {
 
                 results.add(object3);
                 results.add(object2);
 
             } break;
 
-            case 3: {
+            case "03": {
 
                 results.add(object4);
                 results.add(object2);
 
             } break;
 
-            case 4: {
+            case "04": {
 
                 results.add(object5);
                 results.add(object2);
