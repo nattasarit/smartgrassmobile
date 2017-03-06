@@ -100,11 +100,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_task) {
-
+            fab.show();
             fragment = TaskFragment.newInstance();
 
         } else if (id == R.id.nav_suggestion) {
-
+            fab.hide();
             fragment = SuggestionFragment.newInstance();
 
         } else if (id == R.id.nav_logout) {
