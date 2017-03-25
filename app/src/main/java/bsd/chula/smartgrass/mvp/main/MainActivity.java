@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import bsd.chula.smartgrass.R;
+import bsd.chula.smartgrass.mvp.createorder.CreateOrderActivity;
 import bsd.chula.smartgrass.mvp.login.LoginActivity;
 import bsd.chula.smartgrass.mvp.suggestion.SuggestionFragment;
 import bsd.chula.smartgrass.mvp.task.TaskFragment;
@@ -75,6 +76,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
 
+                Intent createOrderIntent = new Intent(getApplicationContext(), CreateOrderActivity.class);
+                startActivity(createOrderIntent);
             }
         });
     }

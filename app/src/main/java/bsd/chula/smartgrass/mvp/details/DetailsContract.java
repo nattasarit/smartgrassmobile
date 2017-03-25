@@ -17,5 +17,6 @@ public interface DetailsContract {
 
     interface Interactor {
 
+
     }
 }
