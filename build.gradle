@@ -18,6 +18,17 @@ allprojects {
     }
 }
 
+ext {
+
+    supportVersion = '25.3.0'
+    googleMapVersion = '10.2.1'
+    retrofitVersion = '2.2.0'
+    butterknifeVersion = '8.5.1'
+    gsonVersion = '2.8.0'
+    glideVersion = '3.7.0'
+
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
