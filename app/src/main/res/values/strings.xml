@@ -32,4 +32,24 @@
     <string name="main_dialog_event_check">ดำเนินการตรวจรับ</string>
     <string name="main_dialog_event_deliver">จัดส่ง</string>
 
+    <!-- Create Order-->
+    <string name="create_order_tile_label">ข้อมูลที่จำเป็น</string>
+    <string name="create_order_first_name_last_name">ชื่อ - นามสกุล</string>
+    <string name="create_order_email">Email</string>
+    <string name="create_order_tel">เบอร์ติดต่อ</string>
+    <string name="create_order_address">ที่อยู่</string>
+    <string name="create_order_location">พิกัดบนแผนที่</string>
+    <string name="create_order_appointment">นัดหมาย</string>
+    <string name="create_order_request_type_label">ประเภทคำสั่ง</string>
+    <string name="create_order_request_type_1">ซื้อไปติดตั้งเอง</string>
+    <string name="create_order_request_type_2">ให้ทางร้านติดตั้ง</string>
+    <string name="create_order_grass_type_label">ประเภทหญ้าเทียม</string>
+    <string name="create_order_grass_type_1">จัดสวน</string>
+    <string name="create_order_grass_type_2">สนามกีฬา</string>
+
+    <!-- Button-->
+    <string name="button_cancel">ยกเลิก</string>
+    <string name="button_save">บันทึก</string>
+    <string name="button_next">ขั้นตอนถัดไป</string>
+
 </resources>
