@@ -7,6 +7,7 @@
     <color name="black_80_transparent">#80000000</color>
     <color name="gray_line">#b7b7b7</color>
     <color name="gray_bg">#f4f4f4</color>
+    <color name="gray_20_transparent">#80f4f4f4</color>
     <color name="red">#990000</color>
 
     <!-- Status Gate -->

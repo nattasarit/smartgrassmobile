@@ -1,6 +1,15 @@
 package bsd.chula.smartgrass.mvp.login;
 
-import android.content.Context;
+
+import java.util.List;
+
+import bsd.chula.smartgrass.api.APIManager;
+import bsd.chula.smartgrass.api.APIServices;
+import bsd.chula.smartgrass.data.model.Login;
+import bsd.chula.smartgrass.data.model.Role;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Dev_Tee on 1/28/17.
@@ -8,23 +17,32 @@ import android.content.Context;
 
 public class LoginInteractor implements LoginContract.Interactor{
 
-    private Context context;
+    private APIServices apiServices;
 
-    public LoginInteractor(Context context) {
-        this.context = context;
+    public LoginInteractor() {
+        apiServices = APIManager.getService();
     }
 
     @Override
-    public void login(String username, String password, LoginContract.LoginListener listener) {
+    public void login(Login login, final LoginContract.LoginListener listener) {
 
-        //ทดสอบ
+        apiServices.getLogin(login).enqueue(new Callback<List<Role>>() {
+            @Override
+            public void onResponse(Call<List<Role>> call, Response<List<Role>> response) {
 
-//        if (username.contentEquals("Kittisak") && password.contentEquals("password1")) {
-//            listener.onLoginSuccess();
-//        } else {
-//            listener.onLoginError("Your Username & Password NOT Correct!");
-//        }
-        listener.onLoginSuccess();
+                if (response.code() == 200) {
+                    List<Role> roleList = response.body();
+                    listener.onLoginSuccess(roleList);
+                } else {
+                    listener.onLoginError(response.message());
+                }
 
+            }
+
+            @Override
+            public void onFailure(Call<List<Role>> call, Throwable t) {
+                listener.onLoginError(t.getLocalizedMessage());
+            }
+        });
     }
 }
