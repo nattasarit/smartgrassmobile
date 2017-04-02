@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIManager {
 
-    private static String BASE_URL = "http://smartgrasss.gear.host/test/";
+    private static String BASE_URL = "http://smartgrasss.gear.host/ServiceForApp/";
 
     public static APIServices getService() {
 

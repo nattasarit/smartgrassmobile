@@ -1,0 +1,66 @@
+package bsd.chula.smartgrass.data.model;
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+public class Role{
+
+	@SerializedName("FunctionID")
+	@Expose
+	private String functionID;
+
+	@SerializedName("RoleName")
+	@Expose
+	private String roleName;
+
+	@SerializedName("RoleId")
+	@Expose
+	private String roleId;
+
+	@SerializedName("FuncionName")
+	@Expose
+	private String funcionName;
+
+	public void setFunctionID(String functionID){
+		this.functionID = functionID;
+	}
+
+	public String getFunctionID(){
+		return functionID;
+	}
+
+	public void setRoleName(String roleName){
+		this.roleName = roleName;
+	}
+
+	public String getRoleName(){
+		return roleName;
+	}
+
+	public void setRoleId(String roleId){
+		this.roleId = roleId;
+	}
+
+	public String getRoleId(){
+		return roleId;
+	}
+
+	public void setFuncionName(String funcionName){
+		this.funcionName = funcionName;
+	}
+
+	public String getFuncionName(){
+		return funcionName;
+	}
+
+	@Override
+ 	public String toString(){
+		return 
+			"Role{" + 
+			"functionID = '" + functionID + '\'' + 
+			",roleName = '" + roleName + '\'' + 
+			",roleId = '" + roleId + '\'' + 
+			",funcionName = '" + funcionName + '\'' + 
+			"}";
+		}
+}

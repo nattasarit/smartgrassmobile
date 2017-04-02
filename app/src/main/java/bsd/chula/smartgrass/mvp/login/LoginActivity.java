@@ -12,12 +12,16 @@ import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 
 import bsd.chula.smartgrass.R;
 import bsd.chula.smartgrass.mvp.main.MainActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import jp.wasabeef.glide.transformations.BlurTransformation;
 
 /**
  * Created by Dev_Tee on 1/28/17.
@@ -29,6 +33,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     AppCompatEditText editUsername;
     @BindView(R.id.editPassword)
     AppCompatEditText editPassword;
+    @BindView(R.id.imgThumbnail)
+    ImageView imgThumbnail;
 
     private Context context;
     private LoginPresenter presenter;
@@ -42,8 +48,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         context = getApplicationContext();
         presenter = new LoginPresenter(context, this);
 
-        setDrawableLeft(editUsername, R.drawable.ic_username);
-        setDrawableLeft(editPassword, R.drawable.ic_password);
+        initView();
     }
 
     @Override
@@ -62,30 +67,23 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @OnClick(R.id.btnLogin)
     public void onLoginButtonClick(View view) {
-       /* String username = editUsername.getText().toString();
+        String username = editUsername.getText().toString();
         String password = editPassword.getText().toString();
 
         if (username.length() == 0) {
             setEditTextError(editUsername);
-
         } else if (password.length() == 0) {
-
             setEditTextError(editPassword);
         } else {
             presenter.login(username, password);
         }
 
-        presenter.login(username, password);*/
-
-        Intent mainActivity = new Intent(this, MainActivity.class);
-        startActivity(mainActivity);
     }
 
-    private static void setDrawableLeft(EditText editText, int resourceId) {
-        Drawable drawable = VectorDrawableCompat.create(editText.getResources(), resourceId, editText.getContext().getTheme());
-        Drawable[] drawables = editText.getCompoundDrawables();
-        editText.setCompoundDrawablesWithIntrinsicBounds(drawable,
-                drawables[1], drawables[2], drawables[3]);
+    private void initView() {
+        Glide.with(context).load(R.mipmap.ic_grass_home)
+                .bitmapTransform(new BlurTransformation(context))
+                .into(imgThumbnail);
     }
 
     private void setEditTextError(EditText editText) {

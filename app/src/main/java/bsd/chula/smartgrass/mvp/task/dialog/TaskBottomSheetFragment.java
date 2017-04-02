@@ -16,8 +16,6 @@ import java.util.List;
 import bsd.chula.smartgrass.R;
 import bsd.chula.smartgrass.data.model.Work;
 import bsd.chula.smartgrass.mvp.checktoreceive.CheckToReceiveActivity;
-import bsd.chula.smartgrass.data.model.Order;
-import bsd.chula.smartgrass.mvp.draw.DrawActivity;
 import bsd.chula.smartgrass.mvp.navigate.NavigateActivity;
 import bsd.chula.smartgrass.utils.SpacesItemDecoration;
 import bsd.chula.smartgrass.web.WebViewActivity;
@@ -107,18 +105,12 @@ public class TaskBottomSheetFragment extends BottomSheetDialogFragment {
         object5.setRes(R.drawable.ic_calendar);
         object5.setTitle(context.getString(R.string.main_dialog_event_deliver));
 
-        TaskDialogObject object6 = new TaskDialogObject();
-        object6.setId(6);
-        object6.setRes(R.drawable.ic_alert);
-        object6.setTitle("ประเมินหน้างาน - WebView");
-
         switch (work.getWorkStatusID()) {
 
             case "01": {
 
                 results.add(object1);
                 results.add(object2);
-                results.add(object6);
 
             } break;
 
@@ -158,8 +150,8 @@ public class TaskBottomSheetFragment extends BottomSheetDialogFragment {
 
                 case 1: {
 
-                    Intent drawIntent = new Intent(context, DrawActivity.class);
-                    context.startActivity(drawIntent);
+                    Intent webViewIntent = new Intent(context, WebViewActivity.class);
+                    context.startActivity(webViewIntent);
 
                 } break;
 
@@ -186,12 +178,6 @@ public class TaskBottomSheetFragment extends BottomSheetDialogFragment {
 
                 } break;
 
-                case 6: {
-
-                    Intent webViewIntent = new Intent(context, WebViewActivity.class);
-                    context.startActivity(webViewIntent);
-
-                } break;
             }
 
 

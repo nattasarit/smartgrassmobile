@@ -33,7 +33,7 @@
             android:name=".mvp.main.MainActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".mvp.draw.DrawActivity" />
+        <activity android:name=".mvp.createorder.CreateOrderActivity" />
 
         <activity android:name=".mvp.navigate.NavigateActivity" />
 
