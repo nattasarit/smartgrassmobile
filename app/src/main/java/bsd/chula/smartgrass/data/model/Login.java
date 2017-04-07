@@ -17,12 +17,4 @@ public class Login{
 	public List<LoginItem> getLogin(){
 		return login;
 	}
-
-	@Override
- 	public String toString(){
-		return 
-			"Login{" + 
-			"login = '" + login + '\'' + 
-			"}";
-		}
 }

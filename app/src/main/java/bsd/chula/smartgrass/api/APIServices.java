@@ -11,6 +11,9 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
 
 /**
  * Created by Dev_Tee on 1/28/17.
@@ -26,8 +29,7 @@ public interface APIServices {
     Call<List<Grass>> getAllGrass (
     );
 
-    @FormUrlEncoded
-    @GET("serviceGet.php?action")
+    @POST("serviceGet.php?action")
     Call<List<Role>> getLogin (
             @Body Login login
     );

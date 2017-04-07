@@ -1,6 +1,7 @@
 package bsd.chula.smartgrass.mvp.login;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -41,9 +42,6 @@ public class LoginPresenter implements LoginContract.UserActions {
         newList.add(loginItem);
 
         login.setLogin(newList);
-
-        Gson gson = new Gson();
-        gson.toJson(login);
 
         interactor.login(login, new LoginContract.LoginListener() {
             @Override

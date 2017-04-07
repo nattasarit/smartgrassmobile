@@ -28,13 +28,4 @@ public class LoginItem{
 	public String getPassword(){
 		return password;
 	}
-
-	@Override
- 	public String toString(){
-		return 
-			"LoginItem{" + 
-			"username = '" + username + '\'' + 
-			",password = '" + password + '\'' + 
-			"}";
-		}
 }
