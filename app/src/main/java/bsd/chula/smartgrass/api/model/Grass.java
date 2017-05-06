@@ -1,4 +1,4 @@
-package bsd.chula.smartgrass.data.model;
+package bsd.chula.smartgrass.api.model;
 
 import com.google.gson.annotations.SerializedName;
 

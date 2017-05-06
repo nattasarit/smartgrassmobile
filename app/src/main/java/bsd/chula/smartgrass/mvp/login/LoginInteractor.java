@@ -5,8 +5,7 @@ import java.util.List;
 
 import bsd.chula.smartgrass.api.APIManager;
 import bsd.chula.smartgrass.api.APIServices;
-import bsd.chula.smartgrass.data.model.Login;
-import bsd.chula.smartgrass.data.model.Role;
+import bsd.chula.smartgrass.api.model.Role;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,9 +23,8 @@ public class LoginInteractor implements LoginContract.Interactor{
     }
 
     @Override
-    public void login(Login login, final LoginContract.LoginListener listener) {
-
-        apiServices.getLogin(login).enqueue(new Callback<List<Role>>() {
+    public void login(String username, String password, final LoginContract.LoginListener listener) {
+        apiServices.getLogin(username, password).enqueue(new Callback<List<Role>>() {
             @Override
             public void onResponse(Call<List<Role>> call, Response<List<Role>> response) {
 

@@ -17,13 +17,13 @@ android {
 
 
         resValue "string", "google_maps_key",
-                (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "")
+                (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "AIzaSyAXxq3TjA9Yfsfox0A32upvp-z_dey-7U8")
     }
 
     buildTypes {
 
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -41,6 +41,8 @@ dependencies {
     compile "com.google.android.gms:play-services-maps:$rootProject.googleMapVersion"
     compile "com.google.android.gms:play-services-location:$rootProject.googleMapVersion"
     compile "com.google.android.gms:play-services-places:$rootProject.googleMapVersion"
+
+    compile 'com.google.maps.android:android-maps-utils:0.5+'
 
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
@@ -64,4 +66,5 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     testCompile 'junit:junit:4.12'
+    testCompile "org.mockito:mockito-core:2.+"
 }

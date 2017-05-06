@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.txusballesteros.widgets.FitChart;
 import com.txusballesteros.widgets.FitChartValue;
 
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,8 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 import bsd.chula.smartgrass.R;
-import bsd.chula.smartgrass.data.model.Order;
-import bsd.chula.smartgrass.data.model.Work;
+import bsd.chula.smartgrass.api.model.Work;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

@@ -2,9 +2,7 @@ package bsd.chula.smartgrass.mvp.login;
 
 import java.util.List;
 
-import bsd.chula.smartgrass.data.model.Login;
-import bsd.chula.smartgrass.data.model.LoginItem;
-import bsd.chula.smartgrass.data.model.Role;
+import bsd.chula.smartgrass.api.model.Role;
 
 /**
  * Created by Dev_Tee on 1/28/17.
@@ -27,7 +25,7 @@ public interface LoginContract {
 
     interface Interactor {
 
-        void login(Login login, LoginListener listener);
+        void login(String username, String password, LoginListener listener);
     }
 
     interface LoginListener {

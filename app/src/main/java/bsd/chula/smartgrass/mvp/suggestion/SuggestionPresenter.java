@@ -4,7 +4,7 @@ import android.content.Context;
 
 import java.util.List;
 
-import bsd.chula.smartgrass.data.model.Grass;
+import bsd.chula.smartgrass.api.model.Grass;
 
 /**
  * Created by Dev_Tee on 3/5/17.

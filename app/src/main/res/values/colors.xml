@@ -9,6 +9,8 @@
     <color name="gray_bg">#f4f4f4</color>
     <color name="gray_20_transparent">#80f4f4f4</color>
     <color name="red">#990000</color>
+    
+    <color name="green">#479a76</color>
 
     <!-- Status Gate -->
     <color name="colorStatus1">#ffcc0000</color>

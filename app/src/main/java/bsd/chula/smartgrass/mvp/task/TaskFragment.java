@@ -17,7 +17,7 @@ import android.widget.ProgressBar;
 import java.util.List;
 
 import bsd.chula.smartgrass.R;
-import bsd.chula.smartgrass.data.model.Work;
+import bsd.chula.smartgrass.api.model.Work;
 import bsd.chula.smartgrass.mvp.task.dialog.TaskBottomSheetFragment;
 import bsd.chula.smartgrass.utils.SpacesItemDecoration;
 import butterknife.BindView;

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bsd.chula.smartgrass.R;
-import bsd.chula.smartgrass.data.model.Grass;
+import bsd.chula.smartgrass.api.model.Grass;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

@@ -46,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         ButterKnife.bind(this);
 
         context = getApplicationContext();
-        presenter = new LoginPresenter(context, this);
+        presenter = new LoginPresenter(this);
 
         initView();
     }
@@ -77,7 +77,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         } else {
             presenter.login(username, password);
         }
-
     }
 
     private void initView() {

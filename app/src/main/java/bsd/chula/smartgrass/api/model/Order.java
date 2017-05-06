@@ -1,6 +1,4 @@
-package bsd.chula.smartgrass.data.model;
-
-import java.util.Date;
+package bsd.chula.smartgrass.api.model;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

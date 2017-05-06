@@ -2,7 +2,7 @@ package bsd.chula.smartgrass.mvp.checktoreceive;
 
 import android.content.Context;
 
-import bsd.chula.smartgrass.data.model.Order;
+import bsd.chula.smartgrass.api.model.Order;
 
 /**
  * Created by Dev_Tee on 2/22/17.

@@ -14,14 +14,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import bsd.chula.smartgrass.R;
-import bsd.chula.smartgrass.mvp.createorder.CreateOrderActivity;
 import bsd.chula.smartgrass.mvp.login.LoginActivity;
+import bsd.chula.smartgrass.mvp.neworder.NewOrderActivity;
 import bsd.chula.smartgrass.mvp.suggestion.SuggestionFragment;
 import bsd.chula.smartgrass.mvp.task.TaskFragment;
 import butterknife.BindView;
@@ -76,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View view) {
 
-                Intent createOrderIntent = new Intent(getApplicationContext(), CreateOrderActivity.class);
+                Intent createOrderIntent = new Intent(getApplicationContext(), NewOrderActivity.class);
                 startActivity(createOrderIntent);
             }
         });

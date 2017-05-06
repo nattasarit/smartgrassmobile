@@ -6,4 +6,6 @@ package bsd.chula.smartgrass.utils;
 
 public class Constants {
 
+    public static final String SURVEY_URL = "http://smartgrasss.gear.host/SmartGrass/SmartGrassNew.html?WOID=3";
+
 }

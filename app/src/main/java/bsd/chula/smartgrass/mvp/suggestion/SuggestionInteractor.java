@@ -6,7 +6,7 @@ import java.util.List;
 
 import bsd.chula.smartgrass.api.APIManager;
 import bsd.chula.smartgrass.api.APIServices;
-import bsd.chula.smartgrass.data.model.Grass;
+import bsd.chula.smartgrass.api.model.Grass;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

@@ -2,13 +2,9 @@ package bsd.chula.smartgrass.mvp.task;
 
 import android.content.Context;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import bsd.chula.smartgrass.data.model.Customer;
-import bsd.chula.smartgrass.data.model.Order;
-import bsd.chula.smartgrass.data.model.Status;
-import bsd.chula.smartgrass.data.model.Work;
+import bsd.chula.smartgrass.api.model.Work;
 
 /**
  * Created by Dev_Tee on 1/28/17.
