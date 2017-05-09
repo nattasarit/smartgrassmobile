@@ -35,6 +35,11 @@ public class NewOrderFragment1 extends Fragment {
     LinearLayout mLayoutBtnNext;
     Unbinder unbinder;
 
+    public static NewOrderFragment1 newInstance() {
+        NewOrderFragment1 fragment = new NewOrderFragment1();
+        return fragment;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

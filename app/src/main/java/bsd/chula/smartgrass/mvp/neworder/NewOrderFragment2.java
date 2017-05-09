@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import bsd.chula.smartgrass.R;
+
 /**
  * Created by Dev_Tee on 5/6/17.
  */
@@ -21,7 +23,8 @@ public class NewOrderFragment2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_new_order_two, container, false);
+        return view;
     }
 
     @Override

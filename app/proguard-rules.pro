@@ -23,7 +23,6 @@
 -dontwarn retrofit2.Platform$Java8
 -keepattributes Signature
 -keepattributes Exceptions
-# End
 
 # Gson
 -keepattributes Signature
@@ -33,12 +32,10 @@
 -keep class * implements com.google.gson.TypeAdapterFactory
 -keep class * implements com.google.gson.JsonSerializer
 -keep class * implements com.google.gson.JsonDeserializer
-# End
 
 # Google Map
 -keep class com.google.android.gms.maps.** { ; }
 -keep interface com.google.android.gms.maps.* { *; }
-# End
 
 #Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
@@ -46,4 +43,8 @@
   **[] $VALUES;
   public *;
 }
-# End
+
+# Parceler library
+-keep interface org.parceler.Parcel
+-keep @org.parceler.Parcel class * { *; }
+-keep class **$$Parcelable { *; }

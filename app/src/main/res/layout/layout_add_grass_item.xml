@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
-    android:layout_height="300dp">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutGrassItem"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:layout_margin="10dp">
 
     <ImageView
-        android:id="@+id/imgThumbnail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_grass_home" />
+        android:src="@mipmap/ic_grass_home"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,25 +21,24 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/txtName"
+            android:id="@+id/textGrassName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Title"
             android:textColor="@android:color/white"
             android:textSize="26sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/txtDescription"
+            android:id="@+id/textGrassPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Description"
+            android:text="999,999"
             android:textColor="@android:color/white"
             android:textSize="18sp"
-            android:textStyle="normal" />
+            android:textStyle="normal"/>
 
     </LinearLayout>
-
 
 </RelativeLayout>

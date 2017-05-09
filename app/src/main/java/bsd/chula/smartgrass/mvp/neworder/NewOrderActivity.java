@@ -46,6 +46,10 @@ public class NewOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_order);
         ButterKnife.bind(this);
+
+        if (savedInstanceState == null) {
+            switchFragment(NewOrderFragment1.newInstance());
+        }
     }
 
     private void switchFragment(Fragment fragment) {
