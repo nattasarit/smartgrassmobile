@@ -4,9 +4,12 @@ import java.util.List;
 
 import bsd.chula.smartgrass.api.model.Grass;
 import bsd.chula.smartgrass.api.model.InsertResponse;
+import bsd.chula.smartgrass.api.model.Material;
 import bsd.chula.smartgrass.api.model.MaxOrder;
 import bsd.chula.smartgrass.api.model.MaxWork;
+import bsd.chula.smartgrass.api.model.Result;
 import bsd.chula.smartgrass.api.model.Role;
+import bsd.chula.smartgrass.api.model.Schedule;
 import bsd.chula.smartgrass.api.model.Work;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -19,12 +22,10 @@ import retrofit2.http.Query;
 public interface APIServices {
 
     @GET("serviceGet.php?action=getWork")
-    Call<List<Work>> getAllWorks (
-    );
+    Call<List<Work>> getAllWorks ();
 
     @GET("serviceGet.php?action=getGrassDetail")
-    Call<List<Grass>> getAllGrass (
-    );
+    Call<List<Grass>> getAllGrass ();
 
     @GET("serviceGet.php?action=getLogin")
     Call<List<Role>> getLogin (
@@ -33,9 +34,7 @@ public interface APIServices {
     );
 
     @GET("serviceGet.php?action=getMaxWork")
-    Call<List<MaxWork>> getMaxWork (
-
-    );
+    Call<List<MaxWork>> getMaxWork ();
 
     @GET("serviceInsert.php?action=insertWork")
     Call<List<InsertResponse>> insertWork (
@@ -48,9 +47,7 @@ public interface APIServices {
     );
 
     @GET("serviceGet.php?action=getMaxOrder")
-    Call<List<MaxOrder>> getMaxOrder (
-
-    );
+    Call<List<MaxOrder>> getMaxOrder ();
 
     @GET("serviceInsert.php?action=insertOrder")
     Call<List<InsertResponse>> insertOrder (
@@ -62,4 +59,19 @@ public interface APIServices {
             @Query("Unit") int unit,
             @Query("Amount") double amount
     );
+
+    @GET("serviceGet.php?action=getScheduleNow")
+    Call<List<Schedule>> getSchedule ();
+
+    @GET("serviceInsert.php?action=insertSchedule")
+    Call<List<InsertResponse>> insertSchedule (
+            @Query("ScheduleCategoryID") int scheduleID,
+            @Query("WorkID") int workID,
+            @Query("Detail") String details,
+            @Query("Date") String date,
+            @Query("Time") String time
+    );
+
+    @GET("serviceGet.php?action=getMaterialDetail")
+    Call<List<Material>> getMaterial ();
 }

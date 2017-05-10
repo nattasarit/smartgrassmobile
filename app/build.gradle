@@ -17,7 +17,7 @@ android {
 
 
         resValue "string", "google_maps_key",
-                (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "AIzaSyAXxq3TjA9Yfsfox0A32upvp-z_dey-7U8")
+                (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "AIzaSyA38pWD5I1G5A5mP1_PXMzdvo5FVGIrxmQ")
     }
 
     buildTypes {

@@ -1,5 +1,6 @@
 package bsd.chula.smartgrass.mvp.neworder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -52,7 +53,12 @@ public class NewOrderActivity extends AppCompatActivity {
         }
     }
 
-    private void switchFragment(Fragment fragment) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void switchFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(mContentFrame.getId(), fragment)
                 .commit();

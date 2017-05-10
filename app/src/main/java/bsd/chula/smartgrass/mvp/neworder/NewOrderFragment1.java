@@ -13,6 +13,7 @@ import android.widget.TextView;
 import bsd.chula.smartgrass.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -62,5 +63,14 @@ public class NewOrderFragment1 extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @OnClick(R.id.layoutBtnNext)
+    public void onNextButtonClick(View view) {
+
+    }
+
+    @OnClick(R.id.textLocation)
+    public void onChooseLocationButtonClick(View view) {
     }
 }
