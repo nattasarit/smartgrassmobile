@@ -3,6 +3,7 @@ package bsd.chula.smartgrass.mvp.neworder;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +18,16 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.akexorcist.googledirection.DirectionCallback;
+import com.akexorcist.googledirection.GoogleDirection;
+import com.akexorcist.googledirection.constant.AvoidType;
+import com.akexorcist.googledirection.constant.RequestResult;
+import com.akexorcist.googledirection.constant.Unit;
+import com.akexorcist.googledirection.model.Direction;
+import com.akexorcist.googledirection.model.Leg;
+import com.akexorcist.googledirection.model.Route;
+import com.akexorcist.googledirection.model.Step;
+import com.akexorcist.googledirection.util.DirectionConverter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
@@ -27,18 +38,23 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.android.SphericalUtil;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import bsd.chula.smartgrass.R;
 import butterknife.BindView;
@@ -50,7 +66,7 @@ import butterknife.OnClick;
  */
 
 public class NewOrderChooseLocationActivity extends AppCompatActivity implements OnMapReadyCallback,
-        PlaceSelectionListener, GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
     @BindView(R.id.editText)
@@ -75,8 +91,7 @@ public class NewOrderChooseLocationActivity extends AppCompatActivity implements
     private boolean mLocationPermissionGranted;
     private Location mLastKnownLocation;
 
-    private Marker mMarkerA;
-    private Marker mMarkerB;
+    private MarkerOptions mMarkerA, mMarkerB;
     private Polyline mPolyline;
 
     @Override
@@ -136,19 +151,6 @@ public class NewOrderChooseLocationActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onPlaceSelected(Place place) {
-
-        Place selectedPlace = place;
-
-        
-    }
-
-    @Override
-    public void onError(Status status) {
-
-    }
-
-    @Override
     public void onConnected(@Nullable Bundle bundle) {
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -188,6 +190,19 @@ public class NewOrderChooseLocationActivity extends AppCompatActivity implements
             if (resultCode == RESULT_OK) {
                 Place place = PlaceAutocomplete.getPlace(this, data);
                 Log.i(TAG, "Place: " + place.getName());
+
+                LatLng selectedLatLng = place.getLatLng();
+
+                mMarkerB = new MarkerOptions()
+                        .title("Marker B")
+                        .snippet("")
+                        .position(selectedLatLng);
+
+                mGoogleMap.addMarker(mMarkerB);
+
+                drawPolyline(mDefaultLocation, selectedLatLng);
+
+
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
                 Status status = PlaceAutocomplete.getStatus(this, data);
                 // TODO: Handle the error.
@@ -220,10 +235,12 @@ public class NewOrderChooseLocationActivity extends AppCompatActivity implements
 
             mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, 13));
 
-            mGoogleMap.addMarker(new MarkerOptions()
+            mMarkerA = new MarkerOptions()
                     .title("Chulalongkorn Universiry")
                     .snippet("The most populous university in Thailand.")
-                    .position(mDefaultLocation));
+                    .position(mDefaultLocation);
+
+            mGoogleMap.addMarker(mMarkerA);
 
         } else {
             mGoogleMap.setMyLocationEnabled(false);
@@ -262,14 +279,6 @@ public class NewOrderChooseLocationActivity extends AppCompatActivity implements
         }
     }
 
-    private void showDistance() {
-        double distance = SphericalUtil.computeDistanceBetween(mMarkerA.getPosition(), mMarkerB.getPosition());
-
-    }
-
-    private void updatePolyline() {
-        mPolyline.setPoints(Arrays.asList(mMarkerA.getPosition(), mMarkerB.getPosition()));
-    }
 
     private String formatNumber(double distance) {
         String unit = "m";
@@ -282,5 +291,49 @@ public class NewOrderChooseLocationActivity extends AppCompatActivity implements
         }
 
         return String.format("%4.3f%s", distance, unit);
+    }
+
+    private void drawPolyline(LatLng origin, LatLng destination) {
+
+        LatLngBounds bounds = new LatLngBounds(origin, destination);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 50);
+        mGoogleMap.moveCamera(cameraUpdate);
+
+        String serverKey = "AIzaSyBssfXA5AMaPaIqEUjobX06LAmsqjyRFJ4";
+        GoogleDirection.withServerKey(serverKey)
+                .from(origin)
+                .to(destination)
+                .avoid(AvoidType.FERRIES)
+                .avoid(AvoidType.INDOOR)
+                .unit(Unit.METRIC)
+                .execute(new DirectionCallback() {
+                    @Override
+                    public void onDirectionSuccess(Direction direction, String rawBody) {
+
+                        String status = direction.getStatus();
+
+                        if(status.equals(RequestResult.OK)) {
+
+                            Route route = direction.getRouteList().get(0);
+                            Leg leg = route.getLegList().get(0);
+
+                            ArrayList<LatLng> directionPositionList = leg.getDirectionPoint();
+                            PolylineOptions polylineOptions = DirectionConverter.createPolyline(getApplicationContext(),
+                                    directionPositionList, 5, Color.RED);
+
+                            mGoogleMap.addPolyline(polylineOptions);
+
+                            Log.d(TAG, "Distance = " + leg.getDistance().getText());
+
+                        } else if(status.equals(RequestResult.NOT_FOUND)) {
+                            // Do something
+                        }
+                    }
+
+                    @Override
+                    public void onDirectionFailure(Throwable t) {
+                        // Do something here
+                    }
+                });
     }
 }
