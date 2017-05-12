@@ -15,6 +15,11 @@ import bsd.chula.smartgrass.R;
 
 public class NewOrderFragment2 extends Fragment {
 
+    public static NewOrderFragment2 newInstance() {
+        NewOrderFragment2 fragment2 = new NewOrderFragment2();
+        return fragment2;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

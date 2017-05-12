@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 
 public class NewOrderActivity extends AppCompatActivity {
 
+
     @BindView(R.id.content_frame)
     FrameLayout mContentFrame;
     @BindView(R.id.textStep1)
@@ -35,6 +36,8 @@ public class NewOrderActivity extends AppCompatActivity {
     TextView mTextStep3;
     @BindView(R.id.layoutStep3)
     RelativeLayout mLayoutStep3;
+    @BindView(R.id.textStep4)
+    TextView mTextStep4;
     @BindView(R.id.layoutStep4)
     RelativeLayout mLayoutStep4;
     @BindView(R.id.imageThumbnail)
@@ -49,7 +52,7 @@ public class NewOrderActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         if (savedInstanceState == null) {
-            switchFragment(NewOrderFragment1.newInstance());
+            switchFragment(NewOrderFragment1.newInstance(), "NewOrderFragment1");
         }
     }
 
@@ -58,9 +61,48 @@ public class NewOrderActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void switchFragment(Fragment fragment) {
+    public void switchFragment(Fragment fragment, String tag) {
+
+        changeStateIndicator(tag);
+
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(mContentFrame.getId(), fragment)
+        fragmentManager.beginTransaction()
+                .replace(mContentFrame.getId(), fragment, tag)
                 .commit();
+    }
+
+    private void changeStateIndicator(String tag) {
+
+        mLayoutStep1.setBackgroundResource(R.drawable.oval_stroke_5dp_gray);
+        mLayoutStep2.setBackgroundResource(R.drawable.oval_stroke_5dp_gray);
+        mLayoutStep3.setBackgroundResource(R.drawable.oval_stroke_5dp_gray);
+        mLayoutStep4.setBackgroundResource(R.drawable.oval_stroke_5dp_gray);
+
+        mTextStep1.setTextColor(getResources().getColor(R.color.gray_line));
+        mTextStep2.setTextColor(getResources().getColor(R.color.gray_line));
+        mTextStep3.setTextColor(getResources().getColor(R.color.gray_line));
+        mTextStep4.setTextColor(getResources().getColor(R.color.gray_line));
+
+        switch (tag) {
+            case "NewOrderFragment1":
+                mLayoutStep1.setBackgroundResource(R.drawable.oval_stroke_5dp_green);
+                mTextStep1.setTextColor(getResources().getColor(R.color.green));
+                break;
+
+            case "NewOrderFragment2":
+                mLayoutStep2.setBackgroundResource(R.drawable.oval_stroke_5dp_green);
+                mTextStep2.setTextColor(getResources().getColor(R.color.green));
+                break;
+
+            case "NewOrderFragment3":
+                mLayoutStep3.setBackgroundResource(R.drawable.oval_stroke_5dp_green);
+                mTextStep3.setTextColor(getResources().getColor(R.color.green));
+                break;
+
+            case "NewOrderFragment4":
+                mLayoutStep4.setBackgroundResource(R.drawable.oval_stroke_5dp_green);
+                mTextStep4.setTextColor(getResources().getColor(R.color.green));
+                break;
+        }
     }
 }

@@ -68,6 +68,8 @@ public class NewOrderFragment1 extends Fragment {
     @OnClick(R.id.layoutBtnNext)
     public void onNextButtonClick(View view) {
 
+        ((NewOrderActivity) getActivity()).switchFragment(NewOrderFragment2.newInstance(),
+                "NewOrderFragment2");
     }
 
     @OnClick(R.id.textLocation)

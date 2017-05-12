@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity
-            android:name=".mvp.neworder.NewOrderChooseLocationActivity"
+            android:name=".mvp.neworder.NewOrderActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
