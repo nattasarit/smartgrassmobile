@@ -1,6 +1,10 @@
 package bsd.chula.smartgrass.mvp.login;
 
 
+import android.util.Log;
+
+import com.google.gson.Gson;
+
 import java.util.List;
 
 import bsd.chula.smartgrass.api.APIManager;
@@ -14,7 +18,7 @@ import retrofit2.Response;
  * Created by Dev_Tee on 1/28/17.
  */
 
-public class LoginInteractor implements LoginContract.Interactor{
+public class LoginInteractor implements LoginContract.Interactor {
 
     private APIServices apiServices;
 
@@ -28,13 +32,13 @@ public class LoginInteractor implements LoginContract.Interactor{
             @Override
             public void onResponse(Call<List<Role>> call, Response<List<Role>> response) {
 
+                List<Role> roleList = response.body();
+
                 if (response.code() == 200) {
-                    List<Role> roleList = response.body();
                     listener.onLoginSuccess(roleList);
                 } else {
                     listener.onLoginError(response.message());
                 }
-
             }
 
             @Override

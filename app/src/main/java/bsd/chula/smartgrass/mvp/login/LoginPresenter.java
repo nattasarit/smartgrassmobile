@@ -10,10 +10,10 @@ import bsd.chula.smartgrass.api.model.Role;
 
 public class LoginPresenter implements LoginContract.UserActions {
 
-    private LoginContract.View view;
+    private LoginContract.LoginView view;
     private LoginInteractor interactor;
 
-    public LoginPresenter(LoginContract.View view) {
+    public LoginPresenter(LoginContract.LoginView view) {
         this.view = view;
 
         interactor = new LoginInteractor();
@@ -22,14 +22,18 @@ public class LoginPresenter implements LoginContract.UserActions {
     @Override
     public void login(String username, String password) {
 
+        view.showLoading(true);
+
         interactor.login(username, password, new LoginContract.LoginListener() {
             @Override
             public void onLoginSuccess(List<Role> roleList) {
+                view.showLoading(false);
                 view.showLoginSuccessUI(roleList);
             }
 
             @Override
             public void onLoginError(String msg) {
+                view.showLoading(false);
                 view.showLoginError(msg);
             }
         });

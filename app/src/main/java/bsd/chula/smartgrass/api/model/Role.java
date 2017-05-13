@@ -6,19 +6,15 @@ import com.google.gson.annotations.SerializedName;
 public class Role{
 
 	@SerializedName("FunctionID")
-	@Expose
 	private String functionID;
 
 	@SerializedName("RoleName")
-	@Expose
 	private String roleName;
 
 	@SerializedName("RoleId")
-	@Expose
 	private String roleId;
 
 	@SerializedName("FuncionName")
-	@Expose
 	private String funcionName;
 
 	public void setFunctionID(String functionID){

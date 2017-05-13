@@ -7,7 +7,6 @@ import bsd.chula.smartgrass.api.model.InsertResponse;
 import bsd.chula.smartgrass.api.model.Material;
 import bsd.chula.smartgrass.api.model.MaxOrder;
 import bsd.chula.smartgrass.api.model.MaxWork;
-import bsd.chula.smartgrass.api.model.Result;
 import bsd.chula.smartgrass.api.model.Role;
 import bsd.chula.smartgrass.api.model.Schedule;
 import bsd.chula.smartgrass.api.model.Work;

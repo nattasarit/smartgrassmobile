@@ -1,5 +1,6 @@
 package bsd.chula.smartgrass.mvp.login;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import bsd.chula.smartgrass.R;
 import bsd.chula.smartgrass.api.model.Role;
@@ -30,7 +32,7 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
  * Created by Dev_Tee on 1/28/17.
  */
 
-public class LoginActivity extends AppCompatActivity implements LoginContract.View {
+public class LoginActivity extends AppCompatActivity implements LoginContract.LoginView {
 
     @BindView(R.id.editUsername)
     AppCompatEditText editUsername;
@@ -41,6 +43,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     private Context context;
     private LoginPresenter presenter;
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,12 +60,12 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Override
     public void showLoginSuccessUI(List<Role> roleList) {
 
-        if (findRole(roleList, "Sell") != null) {
+        if (findRole(roleList, "Sell")) {
 
             Intent saleIntent = new Intent(getApplicationContext(), SaleActivity.class);
             startActivity(saleIntent);
 
-        } else if (findRole(roleList, "Technician") != null) {
+        } else if (findRole(roleList, "Technician")) {
 
             Intent technicianIntent = new Intent(getApplicationContext(), TechnicianActivity.class);
             startActivity(technicianIntent);
@@ -74,6 +77,15 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     @Override
     public void showLoginError(String msg) {
 
+    }
+
+    @Override
+    public void showLoading(boolean isLoad) {
+        if (isLoad) {
+            mProgressDialog.show();
+        } else {
+            mProgressDialog.dismiss();
+        }
     }
 
     @OnClick(R.id.btnLogin)
@@ -94,6 +106,8 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         Glide.with(context).load(R.mipmap.ic_grass_home)
                 .bitmapTransform(new BlurTransformation(context))
                 .into(imgThumbnail);
+
+        mProgressDialog = new ProgressDialog(this);
     }
 
     private void setEditTextError(EditText editText) {
@@ -119,9 +133,15 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         editText.setError(spannableStringBuilder);
     }
 
-    private Role findRole(List<Role> roleList, final String roleName) {
-        java.util.function.Predicate<Role> predicate = c -> c.getRoleName().equalsIgnoreCase(roleName);
-        Role role = roleList.stream().filter(predicate).findFirst().get();
-        return role;
+    private boolean findRole(List<Role> roleList, final String roleName) {
+        boolean isHasRole = false;
+
+        for (Role role : roleList) {
+            if (role.getRoleName().equalsIgnoreCase(roleName)) {
+                return true;
+            }
+        }
+
+        return isHasRole;
     }
 }

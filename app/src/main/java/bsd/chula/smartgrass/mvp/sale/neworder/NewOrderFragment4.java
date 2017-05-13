@@ -36,8 +36,6 @@ public class NewOrderFragment4 extends Fragment implements MonthLoader.MonthChan
     LinearLayout mLayoutBtnNext;
     Unbinder unbinder;
 
-
-
     public static NewOrderFragment4 newInstance() {
         NewOrderFragment4 fragment = new NewOrderFragment4();
         return fragment;

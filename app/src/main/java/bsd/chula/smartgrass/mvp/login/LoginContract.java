@@ -10,11 +10,13 @@ import bsd.chula.smartgrass.api.model.Role;
 
 public interface LoginContract {
 
-    interface View {
+    interface LoginView {
 
         void showLoginSuccessUI(List<Role> roleList);
 
         void showLoginError(String msg);
+
+        void showLoading(boolean isLoad);
 
     }
 

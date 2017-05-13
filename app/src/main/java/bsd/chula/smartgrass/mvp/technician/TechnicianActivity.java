@@ -14,6 +14,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import bsd.chula.smartgrass.R;
+import bsd.chula.smartgrass.api.model.Schedule;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -21,11 +22,14 @@ import butterknife.ButterKnife;
  * Created by Dev_Tee on 5/13/17.
  */
 
-public class TechnicianActivity extends AppCompatActivity implements MonthLoader.MonthChangeListener,
-        WeekView.EventClickListener, WeekView.EventLongPressListener {
+public class TechnicianActivity extends AppCompatActivity implements TechnicianContract.TechnicianView,
+        MonthLoader.MonthChangeListener, WeekView.EventClickListener, WeekView.EventLongPressListener {
 
     @BindView(R.id.weekView)
     WeekView mWeekView;
+
+    private TechnicianPresenter mPresenter;
+    List<WeekViewEvent> events = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -36,6 +40,13 @@ public class TechnicianActivity extends AppCompatActivity implements MonthLoader
         mWeekView.setMonthChangeListener(this);
         mWeekView.setOnEventClickListener(this);
         mWeekView.setEventLongPressListener(this);
+
+        mPresenter = new TechnicianPresenter(this);
+    }
+
+    @Override
+    public void onShowScheduleList(List<Schedule> scheduleList) {
+
     }
 
     @Override
@@ -51,6 +62,7 @@ public class TechnicianActivity extends AppCompatActivity implements MonthLoader
         Calendar endTime = (Calendar) startTime.clone();
         endTime.add(Calendar.HOUR, 1);
         endTime.set(Calendar.MONTH, newMonth - 1);
+
         WeekViewEvent event = new WeekViewEvent(1, getEventTitle(startTime), startTime, endTime);
         event.setColor(getResources().getColor(R.color.colorStatus1));
         events.add(event);
@@ -70,5 +82,10 @@ public class TechnicianActivity extends AppCompatActivity implements MonthLoader
 
     private String getEventTitle(Calendar time) {
         return String.format("Event of %02d:%02d %s/%d", time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), time.get(Calendar.MONTH) + 1, time.get(Calendar.DAY_OF_MONTH));
+    }
+
+    @Override
+    public void onShowErrorDialog(String msg) {
+
     }
 }
