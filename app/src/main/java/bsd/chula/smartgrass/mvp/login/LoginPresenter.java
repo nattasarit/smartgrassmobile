@@ -25,7 +25,7 @@ public class LoginPresenter implements LoginContract.UserActions {
         interactor.login(username, password, new LoginContract.LoginListener() {
             @Override
             public void onLoginSuccess(List<Role> roleList) {
-                view.showLoginSuccessUI();
+                view.showLoginSuccessUI(roleList);
             }
 
             @Override

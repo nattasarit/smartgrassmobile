@@ -1,4 +1,4 @@
-package bsd.chula.smartgrass.mvp.neworder;
+package bsd.chula.smartgrass.mvp.sale.neworder;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +20,6 @@ import butterknife.ButterKnife;
  */
 
 public class NewOrderActivity extends AppCompatActivity {
-
 
     @BindView(R.id.content_frame)
     FrameLayout mContentFrame;

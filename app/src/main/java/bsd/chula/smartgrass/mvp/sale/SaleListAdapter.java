@@ -1,5 +1,4 @@
-package bsd.chula.smartgrass.mvp.task;
-
+package bsd.chula.smartgrass.mvp.sale;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
@@ -24,20 +23,21 @@ import java.util.List;
 
 import bsd.chula.smartgrass.R;
 import bsd.chula.smartgrass.api.model.Work;
+import bsd.chula.smartgrass.mvp.task.TaskListAdapter;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by Dev_Tee on 2/4/17.
+ * Created by Dev_Tee on 5/13/17.
  */
 
-public class TaskListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SaleListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private Context context;
     private List<Work> workList;
     private OnTaskItemClick taskItemClick;
 
-    public TaskListAdapter(Context context, OnTaskItemClick taskItemClick) {
+    public SaleListAdapter(Context context, OnTaskItemClick taskItemClick) {
         this.context = context;
 
         workList = new ArrayList<>();

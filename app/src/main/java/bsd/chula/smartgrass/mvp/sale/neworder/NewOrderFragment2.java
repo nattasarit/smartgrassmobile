@@ -1,5 +1,6 @@
-package bsd.chula.smartgrass.mvp.neworder;
+package bsd.chula.smartgrass.mvp.sale.neworder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import org.parceler.Parcels;
 
 import bsd.chula.smartgrass.R;
 import butterknife.BindView;
@@ -20,7 +23,7 @@ import butterknife.Unbinder;
  * Created by Dev_Tee on 5/6/17.
  */
 
-public class NewOrderFragment1 extends Fragment {
+public class NewOrderFragment2 extends Fragment {
 
     @BindView(R.id.editFirstName)
     EditText mEditFirstName;
@@ -36,8 +39,11 @@ public class NewOrderFragment1 extends Fragment {
     LinearLayout mLayoutBtnNext;
     Unbinder unbinder;
 
-    public static NewOrderFragment1 newInstance() {
-        NewOrderFragment1 fragment = new NewOrderFragment1();
+    private static int mOrderType;
+
+    public static NewOrderFragment2 newInstance(int orderType) {
+        NewOrderFragment2 fragment = new NewOrderFragment2();
+        fragment.mOrderType = orderType;
         return fragment;
     }
 
@@ -49,7 +55,7 @@ public class NewOrderFragment1 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_new_order_one, container, false);
+        View view = inflater.inflate(R.layout.fragment_new_order_step_two, container, false);
         unbinder = ButterKnife.bind(this, view);
         return view;
     }
@@ -57,6 +63,21 @@ public class NewOrderFragment1 extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == NewOrderChooseLocationActivity.REQUEST_CHOOSE_LOCATION_CODE) {
+
+            NewOrderLocationData result = Parcels.unwrap(data.getExtras()
+                    .getParcelable(NewOrderChooseLocationActivity.KEY_DESTINATION_RESULT));
+
+            if (result != null) {
+                mTextLocation.setText(result.getPlaceName());
+            }
+        }
     }
 
     @Override
@@ -68,11 +89,14 @@ public class NewOrderFragment1 extends Fragment {
     @OnClick(R.id.layoutBtnNext)
     public void onNextButtonClick(View view) {
 
-        ((NewOrderActivity) getActivity()).switchFragment(NewOrderFragment2.newInstance(),
-                "NewOrderFragment2");
+        ((NewOrderActivity) getActivity()).switchFragment(NewOrderFragment3.newInstance(),
+                "NewOrderFragment3");
     }
 
     @OnClick(R.id.textLocation)
     public void onChooseLocationButtonClick(View view) {
+
+        Intent chooseLocationIntent = new Intent(getActivity(), NewOrderChooseLocationActivity.class);
+        startActivityForResult(chooseLocationIntent, NewOrderChooseLocationActivity.REQUEST_CHOOSE_LOCATION_CODE);
     }
 }

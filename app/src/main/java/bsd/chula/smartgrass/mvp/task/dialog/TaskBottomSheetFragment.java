@@ -16,7 +16,6 @@ import java.util.List;
 import bsd.chula.smartgrass.R;
 import bsd.chula.smartgrass.api.model.Work;
 import bsd.chula.smartgrass.mvp.checktoreceive.CheckToReceiveActivity;
-import bsd.chula.smartgrass.mvp.navigate.NavigateActivity;
 import bsd.chula.smartgrass.utils.SpacesItemDecoration;
 import bsd.chula.smartgrass.web.WebViewActivity;
 import butterknife.BindView;
@@ -54,7 +53,6 @@ public class TaskBottomSheetFragment extends BottomSheetDialogFragment {
 
     @Override
     public void setupDialog(Dialog dialog, int style) {
-        super.setupDialog(dialog, style);
 
         View view = View.inflate(context, R.layout.fragment_main_bottomsheet, null);
         ButterKnife.bind(this, view);
@@ -162,8 +160,6 @@ public class TaskBottomSheetFragment extends BottomSheetDialogFragment {
 
                 case 3: {
 
-                    Intent directionIntent = new Intent(context, NavigateActivity.class);
-                    context.startActivity(directionIntent);
 
                 } break;
 

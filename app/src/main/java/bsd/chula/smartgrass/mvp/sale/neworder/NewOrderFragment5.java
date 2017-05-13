@@ -1,4 +1,4 @@
-package bsd.chula.smartgrass.mvp.neworder;
+package bsd.chula.smartgrass.mvp.sale.neworder;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,18 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import bsd.chula.smartgrass.R;
-
 /**
- * Created by Dev_Tee on 5/6/17.
+ * Created by Dev_Tee on 5/13/17.
  */
 
-public class NewOrderFragment2 extends Fragment {
-
-    public static NewOrderFragment2 newInstance() {
-        NewOrderFragment2 fragment2 = new NewOrderFragment2();
-        return fragment2;
-    }
+public class NewOrderFragment5 extends Fragment {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,8 +21,7 @@ public class NewOrderFragment2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_new_order_two, container, false);
-        return view;
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override

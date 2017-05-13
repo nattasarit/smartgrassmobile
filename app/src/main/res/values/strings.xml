@@ -5,6 +5,9 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <!-- Header -->
+    <string name="header_sale">ระบบงานขาย</string>
+
     <!-- Action Menu-->
     <string name="action_settings">Settings</string>
     <string name="drawer_menu_task">ระบบงาน</string>
@@ -53,5 +56,9 @@
     <string name="button_next">ขั้นตอนถัดไป</string>
 
     <!-- Choose Location -->
+
+    <!-- Choose type order -->
+    <string name="order_type_1">ซื้อไปติดตั้งเอง</string>
+    <string name="order_type_2">ร้านติดตั้งให้</string>
 
 </resources>

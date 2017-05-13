@@ -2,10 +2,8 @@ package bsd.chula.smartgrass.mvp.login;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.SpannableStringBuilder;
@@ -16,8 +14,13 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.List;
+
 import bsd.chula.smartgrass.R;
+import bsd.chula.smartgrass.api.model.Role;
 import bsd.chula.smartgrass.mvp.main.MainActivity;
+import bsd.chula.smartgrass.mvp.sale.SaleActivity;
+import bsd.chula.smartgrass.mvp.technician.TechnicianActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -52,10 +55,18 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     }
 
     @Override
-    public void showLoginSuccessUI() {
+    public void showLoginSuccessUI(List<Role> roleList) {
 
-        Intent mainIntent = new Intent(this, MainActivity.class);
-        startActivity(mainIntent);
+        if (findRole(roleList, "Sell") != null) {
+
+            Intent saleIntent = new Intent(getApplicationContext(), SaleActivity.class);
+            startActivity(saleIntent);
+
+        } else if (findRole(roleList, "Technician") != null) {
+
+            Intent technicianIntent = new Intent(getApplicationContext(), TechnicianActivity.class);
+            startActivity(technicianIntent);
+        }
 
         finish();
     }
@@ -106,5 +117,11 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
         editText.requestFocus();
         editText.setError(spannableStringBuilder);
+    }
+
+    private Role findRole(List<Role> roleList, final String roleName) {
+        java.util.function.Predicate<Role> predicate = c -> c.getRoleName().equalsIgnoreCase(roleName);
+        Role role = roleList.stream().filter(predicate).findFirst().get();
+        return role;
     }
 }

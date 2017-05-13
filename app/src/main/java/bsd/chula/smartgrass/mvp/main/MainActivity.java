@@ -20,7 +20,7 @@ import android.widget.FrameLayout;
 
 import bsd.chula.smartgrass.R;
 import bsd.chula.smartgrass.mvp.login.LoginActivity;
-import bsd.chula.smartgrass.mvp.neworder.NewOrderActivity;
+import bsd.chula.smartgrass.mvp.sale.neworder.NewOrderActivity;
 import bsd.chula.smartgrass.mvp.suggestion.SuggestionFragment;
 import bsd.chula.smartgrass.mvp.task.TaskFragment;
 import butterknife.BindView;

@@ -1,4 +1,4 @@
-package bsd.chula.smartgrass.mvp.neworder;
+package bsd.chula.smartgrass.mvp.sale.neworder;
 
 import android.Manifest;
 import android.content.Intent;
@@ -14,9 +14,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.akexorcist.googledirection.DirectionCallback;
 import com.akexorcist.googledirection.GoogleDirection;
@@ -26,7 +25,6 @@ import com.akexorcist.googledirection.constant.Unit;
 import com.akexorcist.googledirection.model.Direction;
 import com.akexorcist.googledirection.model.Leg;
 import com.akexorcist.googledirection.model.Route;
-import com.akexorcist.googledirection.model.Step;
 import com.akexorcist.googledirection.util.DirectionConverter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
@@ -37,7 +35,6 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -46,15 +43,12 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.maps.android.SphericalUtil;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import bsd.chula.smartgrass.R;
 import butterknife.BindView;
@@ -69,16 +63,19 @@ public class NewOrderChooseLocationActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
-    @BindView(R.id.editText)
-    EditText mEditText;
+    @BindView(R.id.textLocation)
+    TextView mTextLocation;
     @BindView(R.id.search_button)
     Button mSearchButton;
     @BindView(R.id.layoutBtnNext)
     LinearLayout mLayoutBtnNext;
 
+    public static final int REQUEST_CHOOSE_LOCATION_CODE = 1;
+    public static final String KEY_DESTINATION_RESULT = "KEY_DESTINATION_RESULT";
+
     private static final String TAG = "ChooseLocationActivity";
-    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
-    private static final int PLACE_AUTOCOMPLETE_REQUEST_CODE = 2;
+    private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 2;
+    private static final int PLACE_AUTOCOMPLETE_REQUEST_CODE = 3;
     private static final String KEY_CAMERA_POSITION = "camera_position";
     private static final String KEY_LOCATION = "location";
     private static final int DEFAULT_ZOOM = 15;
@@ -90,9 +87,10 @@ public class NewOrderChooseLocationActivity extends AppCompatActivity implements
     private CameraPosition mCameraPosition;
     private boolean mLocationPermissionGranted;
     private Location mLastKnownLocation;
-
     private MarkerOptions mMarkerA, mMarkerB;
-    private Polyline mPolyline;
+    private LatLng mDestination;
+
+    private NewOrderLocationData mObjectData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -170,12 +168,13 @@ public class NewOrderChooseLocationActivity extends AppCompatActivity implements
                 + connectionResult.getErrorCode());
     }
 
-    @OnClick({R.id.editText, R.id.search_button})
+    @OnClick({R.id.textLocation, R.id.search_button})
     public void onSearchLocationClick(View view) {
+
         try {
-            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY)
-                    .build(this);
+            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_OVERLAY).build(this);
             startActivityForResult(intent, PLACE_AUTOCOMPLETE_REQUEST_CODE);
+
         } catch (GooglePlayServicesRepairableException e) {
             // TODO: Handle the error.
         } catch (GooglePlayServicesNotAvailableException e) {
@@ -191,16 +190,18 @@ public class NewOrderChooseLocationActivity extends AppCompatActivity implements
                 Place place = PlaceAutocomplete.getPlace(this, data);
                 Log.i(TAG, "Place: " + place.getName());
 
-                LatLng selectedLatLng = place.getLatLng();
+                mDestination = place.getLatLng();
 
                 mMarkerB = new MarkerOptions()
                         .title("Marker B")
                         .snippet("")
-                        .position(selectedLatLng);
+                        .position(mDestination);
 
                 mGoogleMap.addMarker(mMarkerB);
 
-                drawPolyline(mDefaultLocation, selectedLatLng);
+                drawPolyline(mDefaultLocation, mDestination);
+
+                mObjectData = new NewOrderLocationData(place.getName().toString());
 
 
             } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
@@ -214,29 +215,38 @@ public class NewOrderChooseLocationActivity extends AppCompatActivity implements
         }
     }
 
+    @OnClick(R.id.layoutBtnNext)
+    public void onButtonNextClick(View view) {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(KEY_DESTINATION_RESULT, Parcels.wrap(mObjectData));
+        setResult(REQUEST_CHOOSE_LOCATION_CODE, resultIntent);
+        finish();
+    }
+
     private void updateLocationUI() {
         if (mGoogleMap == null) {
             return;
         }
 
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = true;
         } else {
             ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
 
         if (mLocationPermissionGranted) {
             mGoogleMap.setMyLocationEnabled(true);
             mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
+            mGoogleMap.getUiSettings().setZoomControlsEnabled(true);
 
             mGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mDefaultLocation, 13));
 
             mMarkerA = new MarkerOptions()
-                    .title("Chulalongkorn Universiry")
+                    .title("Chulalongkorn University")
                     .snippet("The most populous university in Thailand.")
                     .position(mDefaultLocation);
 
@@ -252,12 +262,12 @@ public class NewOrderChooseLocationActivity extends AppCompatActivity implements
 
     private void getDeviceLocation() {
         if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION)
+                Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
             mLocationPermissionGranted = true;
         } else {
             ActivityCompat.requestPermissions(this,
-                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
         }
 
@@ -312,7 +322,7 @@ public class NewOrderChooseLocationActivity extends AppCompatActivity implements
 
                         String status = direction.getStatus();
 
-                        if(status.equals(RequestResult.OK)) {
+                        if (status.equals(RequestResult.OK)) {
 
                             Route route = direction.getRouteList().get(0);
                             Leg leg = route.getLegList().get(0);
@@ -323,9 +333,14 @@ public class NewOrderChooseLocationActivity extends AppCompatActivity implements
 
                             mGoogleMap.addPolyline(polylineOptions);
 
-                            Log.d(TAG, "Distance = " + leg.getDistance().getText());
+                            double distance = Double.valueOf(leg.getDistance().getValue());
 
-                        } else if(status.equals(RequestResult.NOT_FOUND)) {
+                            Log.d(TAG, "Distance = " + distance);
+
+                            mObjectData.setLatLng(mDestination);
+                            mObjectData.setDistance(distance);
+
+                        } else if (status.equals(RequestResult.NOT_FOUND)) {
                             // Do something
                         }
                     }

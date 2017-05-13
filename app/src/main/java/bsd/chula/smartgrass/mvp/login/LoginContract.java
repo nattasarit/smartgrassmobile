@@ -12,7 +12,7 @@ public interface LoginContract {
 
     interface View {
 
-        void showLoginSuccessUI();
+        void showLoginSuccessUI(List<Role> roleList);
 
         void showLoginError(String msg);
 
