@@ -19,6 +19,9 @@ public class Work{
 	@SerializedName("WorkStatusName")
 	private String workStatusName;
 
+	@SerializedName("CustomerLastname")
+	private String customerLastname;
+
 	@SerializedName("ArtificialGrassCatagoryID")
 	private String artificialGrassCatagoryID;
 
@@ -77,6 +80,14 @@ public class Work{
 		return workStatusName;
 	}
 
+	public void setCustomerLastname(String customerLastname){
+		this.customerLastname = customerLastname;
+	}
+
+	public String getCustomerLastname(){
+		return customerLastname;
+	}
+
 	public void setArtificialGrassCatagoryID(String artificialGrassCatagoryID){
 		this.artificialGrassCatagoryID = artificialGrassCatagoryID;
 	}
@@ -124,22 +135,4 @@ public class Work{
 	public String getLongitude(){
 		return longitude;
 	}
-
-	@Override
- 	public String toString(){
-		return 
-			"Work{" + 
-			"email = '" + email + '\'' + 
-			",artificialGrassCatagoryName = '" + artificialGrassCatagoryName + '\'' + 
-			",workStatusID = '" + workStatusID + '\'' + 
-			",latitude = '" + latitude + '\'' + 
-			",workStatusName = '" + workStatusName + '\'' + 
-			",artificialGrassCatagoryID = '" + artificialGrassCatagoryID + '\'' + 
-			",tel = '" + tel + '\'' + 
-			",workID = '" + workID + '\'' + 
-			",customerID = '" + customerID + '\'' + 
-			",customerName = '" + customerName + '\'' + 
-			",longitude = '" + longitude + '\'' + 
-			"}";
-		}
 }

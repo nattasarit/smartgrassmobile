@@ -54,6 +54,10 @@
             android:name=".mvp.technician.TechnicianActivity"
             android:screenOrientation="landscape"/>
 
+        <activity
+            android:name=".mvp.technician.TechnicianDetailsActivity"
+            android:screenOrientation="landscape"/>
+
         <activity android:name=".mvp.checktoreceive.CheckToReceiveActivity"/>
 
         <activity

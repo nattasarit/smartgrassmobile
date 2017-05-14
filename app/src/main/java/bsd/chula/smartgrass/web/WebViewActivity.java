@@ -19,13 +19,17 @@ public class WebViewActivity extends AppCompatActivity {
     @BindView(R.id.webView)
     WebView webView;
 
-    private String URL = "http://smartgrasss.gear.host/test/index.html";
+    public static final String EXTRA_URL = "EXTRA_URL";
+
+    private String URL = "http://websmartgrass.gear.host/core_testing/SmartGrassNew.html?WOID=04";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
         ButterKnife.bind(this);
+
+        URL = getIntent().getStringExtra(EXTRA_URL);
 
         initView();
     }

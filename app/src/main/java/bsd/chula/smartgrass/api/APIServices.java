@@ -23,6 +23,11 @@ public interface APIServices {
     @GET("serviceGet.php?action=getWork")
     Call<List<Work>> getAllWorks ();
 
+    @GET("serviceGet.php?action=getWorkByID")
+    Call<List<Work>> getWorkByID (
+            @Query("WorkID") String workID
+    );
+
     @GET("serviceGet.php?action=getGrassDetail")
     Call<List<Grass>> getAllGrass ();
 
