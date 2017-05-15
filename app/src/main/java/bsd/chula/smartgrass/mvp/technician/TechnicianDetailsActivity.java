@@ -2,6 +2,7 @@ package bsd.chula.smartgrass.mvp.technician;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,16 +10,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
+
+import org.parceler.Parcels;
+
 import java.util.List;
 
 import bsd.chula.smartgrass.R;
 import bsd.chula.smartgrass.api.APIManager;
 import bsd.chula.smartgrass.api.APIServices;
 import bsd.chula.smartgrass.api.model.Work;
+import bsd.chula.smartgrass.mvp.ReportActivity;
 import bsd.chula.smartgrass.web.WebViewActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,6 +50,8 @@ public class TechnicianDetailsActivity extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
     private String mWorkID;
     private Work mWork;
+
+    private final LatLng mDefaultLocation = new LatLng(13.7383829, 100.5298641);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -139,6 +146,16 @@ public class TechnicianDetailsActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
+            String URL = "http://maps.google.com/maps?saddr={lat},{lng}&daddr={lat2},{lng2}";
+
+            URL = URL.replace("{lat}", "" + mDefaultLocation.latitude);
+            URL = URL.replace("{lng}", "" + mDefaultLocation.longitude);
+            URL = URL.replace("{lat2}", mWork.getLatitude());
+            URL = URL.replace("{lng2}", mWork.getLongitude());
+
+            Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(URL));
+            startActivity(intent);
+
         }
     }
 
@@ -154,6 +171,9 @@ public class TechnicianDetailsActivity extends AppCompatActivity {
             intent.putExtra(WebViewActivity.EXTRA_URL, URL);
             startActivity(intent);
 
+        /*    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(URL));
+            startActivity(intent);
+*/
         }
     }
 
@@ -162,6 +182,9 @@ public class TechnicianDetailsActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
 
+            Intent intent = new Intent(getApplicationContext(), ReportActivity.class);
+            intent.putExtra(ReportActivity.EXTRA_WORK, Parcels.wrap(mWork));
+            startActivity(intent);
 
         }
     }
@@ -170,6 +193,10 @@ public class TechnicianDetailsActivity extends AppCompatActivity {
 
         @Override
         public void onClick(View v) {
+
+            Intent intent = new Intent(getApplicationContext(), ReportActivity.class);
+            intent.putExtra(ReportActivity.EXTRA_WORK, Parcels.wrap(mWork));
+            startActivity(intent);
 
         }
     }

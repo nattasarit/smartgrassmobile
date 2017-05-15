@@ -64,7 +64,11 @@
             android:name=".mvp.sign.SignActivity"
             android:screenOrientation="landscape"/>
 
-        <activity android:name=".web.WebViewActivity"></activity>
+        <activity android:name=".web.WebViewActivity"
+                  android:screenOrientation="landscape"></activity>
+
+        <activity android:name=".mvp.ReportActivity"
+                  android:screenOrientation="landscape"></activity>
 
         <meta-data
             android:name="com.google.android.gms.version"

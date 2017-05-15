@@ -2,13 +2,14 @@ package bsd.chula.smartgrass.api.model;
 
 import org.parceler.Parcel;
 
+import io.realm.CustomerRealmProxy;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Dev_Tee on 1/28/17.
  */
-@Parcel
+@Parcel(implementations = {CustomerRealmProxy.class}, value = Parcel.Serialization.BEAN, analyze = {Customer.class})
 public class Customer extends RealmObject {
 
     @PrimaryKey

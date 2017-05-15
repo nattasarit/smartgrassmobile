@@ -2,6 +2,9 @@ package bsd.chula.smartgrass.api.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel(Parcel.Serialization.BEAN)
 public class Work{
 
 	@SerializedName("Email")

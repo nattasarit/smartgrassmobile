@@ -3,7 +3,6 @@ package bsd.chula.smartgrass.web;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import bsd.chula.smartgrass.R;
@@ -17,7 +16,7 @@ import butterknife.ButterKnife;
 public class WebViewActivity extends AppCompatActivity {
 
     @BindView(R.id.webView)
-    WebView webView;
+    WebView mWebView;
 
     public static final String EXTRA_URL = "EXTRA_URL";
 
@@ -35,10 +34,36 @@ public class WebViewActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
 
-        webView.loadUrl(URL);
+        mWebView.getSettings().setJavaScriptEnabled(true);
+        mWebView.getSettings().setAllowUniversalAccessFromFileURLs(true);
+
+        mWebView.loadUrl(URL);
     }
 
+   /* @Override
+    protected void onPause() {
+        super.onPause();
+        if (mWebView != null) {
+            mWebView.pauseTimers();
+            mWebView.onHide();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mWebView != null) {
+            mWebView.resumeTimers();
+            mWebView.onShow();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mWebView != null) {
+            mWebView.onDestroy();
+        }
+    }*/
 }

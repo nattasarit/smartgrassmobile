@@ -9,13 +9,13 @@ android {
 
     defaultConfig {
         applicationId "bsd.chula.smartgrass"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
-
 
         resValue "string", "google_maps_key",
                 (project.findProperty("GOOGLE_MAPS_API_KEY") ?: "AIzaSyA38pWD5I1G5A5mP1_PXMzdvo5FVGIrxmQ")
@@ -34,6 +34,20 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    configurations {
+
+        all {
+            resolutionStrategy {
+                eachDependency { details ->
+                    if (details.requested.group == 'com.android.support' && !details.requested.name.contains('multidex')) {
+                        details.useVersion rootProject.supportVersion
+                    }
+                }
+            }
+
+            //   resolutionStrategy.failOnVersionConflict()
+        }
+    }
 }
 
 dependencies {
@@ -47,8 +61,6 @@ dependencies {
     compile "com.google.android.gms:play-services-maps:$rootProject.googleMapVersion"
     compile "com.google.android.gms:play-services-location:$rootProject.googleMapVersion"
     compile "com.google.android.gms:play-services-places:$rootProject.googleMapVersion"
-
-    compile 'com.google.maps.android:android-maps-utils:0.5+'
 
     compile "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
@@ -73,10 +85,8 @@ dependencies {
     compile "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
 
-    compile 'com.itextpdf:kernel:7.0.2'
-    compile 'com.itextpdf:io:7.0.2'
-    compile 'com.itextpdf:layout:7.0.2'
-    compile 'com.itextpdf:forms:7.0.2'
+    compile 'com.itextpdf:itextpdf:5.5.11'
+    compile 'com.itextpdf.tool:xmlworker:5.5.11'
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
