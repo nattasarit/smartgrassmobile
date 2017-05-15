@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SmartGrass.iml" filepath="$PROJECT_DIR$/SmartGrass.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smartgrassmobile.iml" filepath="$PROJECT_DIR$/smartgrassmobile.iml" />
     </modules>
   </component>
 </project>
